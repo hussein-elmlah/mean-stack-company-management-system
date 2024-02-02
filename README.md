@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # MEAN Stack Project
 
 This repository contains the source code for a MEAN (MongoDB, Express.js, Angular, Node.js) stack project.
@@ -99,7 +98,4 @@ This project is licensed under the [GNU General Public License v3.0](https://www
 For any suggestions or feedback, please feel free to contact us.
 
 Enjoy exploring our project!
-=======
-# mean-stack-company-management-system
-mean-stack-company-management-system
->>>>>>> 9cdb6654aa111edc4c2ffc5dfcb2af8541383d0f
+
