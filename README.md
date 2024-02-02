@@ -57,6 +57,23 @@ This repository contains the source code for a MEAN (MongoDB, Express.js, Angula
      npm install
      ```
 
+  ### Database Setup:
+
+  1. Ensure you have MongoDB installed on your machine.
+
+  2. Open MongoDB Compass.
+
+  3. Connect to your local MongoDB server.
+
+  4. In MongoDB Compass, create a new database named `mean-stack-db`.
+
+  5. Import data into the `mean-stack-db` database using the files in the `mean-stack-db` folder.
+
+     ```bash
+     cd ../backend/mean-stack-db
+     mongorestore --db mean-stack-db .
+     ```
+
   ### Configuration:
 
   1. Configure your MongoDB connection in the `backend/config/db.js` file.
@@ -87,7 +104,7 @@ This repository contains the source code for a MEAN (MongoDB, Express.js, Angula
 
 - `/frontend`: Frontend codebase
 - `/backend`: Backend codebase
-- `/docs`: Documentation files
+- `/mean-stack-db`: MongoDB dummy database
 
 ## License:
 
@@ -98,4 +115,3 @@ This project is licensed under the [GNU General Public License v3.0](https://www
 For any suggestions or feedback, please feel free to contact us.
 
 Enjoy exploring our project!
-
