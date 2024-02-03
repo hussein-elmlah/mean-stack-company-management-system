@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const cors = require('cors');
@@ -10,7 +9,7 @@ const app = express();
 app.use(cors());
 
 // Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Connect to MongoDB (replace 'your-database-name' with your actual database name)
 mongoose.connect('mongodb://localhost/mean-stack-db', { useNewUrlParser: true, useUnifiedTopology: true });
