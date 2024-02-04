@@ -1,6 +1,6 @@
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+import User from '../models/User.mjs';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 const generateToken = (user) => {
   const tokenSecret = 'yourSecretKey'; // Replace with your actual secret key
@@ -9,7 +9,7 @@ const generateToken = (user) => {
   return jwt.sign({ userId: user._id, username: user.username, role: user.role }, tokenSecret, { expiresIn });
 };
 
-exports.register = async (req, res) => {
+export async function register(req, res) {
   try {
     const { username, password, role, fullName, dateOfBirth, address, jobLevel, mobileNumber, contract } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -35,9 +35,9 @@ exports.register = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+}
 
-exports.login = async (req, res) => {
+export async function login(req, res) {
   try {
     const { username, password } = req.body;
 
@@ -60,9 +60,9 @@ exports.login = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+}
 
-exports.getUserProfile = async (req, res) => {
+export async function getUserProfile(req, res) {
   try {
     const userId = req.user.userId; // Extracted from the JWT
     const user = await User.findById(userId);
@@ -76,9 +76,9 @@ exports.getUserProfile = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+}
 
-exports.updateUserProfile = async (req, res) => {
+export async function updateUserProfile(req, res) {
   try {
     const userId = req.user.userId; // Extracted from the JWT
     const updatedFields = req.body; // Assuming all fields are updatable
@@ -94,9 +94,9 @@ exports.updateUserProfile = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+}
 
-exports.logout = (req, res) => {
+export function logout(req, res) {
   // You may implement additional logic for logout, such as invalidating tokens
   res.json({ message: 'Logout successful' });
-};
+}

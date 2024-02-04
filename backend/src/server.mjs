@@ -1,9 +1,13 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const userRoutes = require('./routes/userRoutes');
-const projectRoutes = require('./routes/projectRoutes');
-const cors = require('cors');
+import express from 'express';
+import mongoose from 'mongoose';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import userRoutes from './routes/userRoutes.mjs';
+import projectRoutes from './routes/projectRoutes.mjs';
+import cors from 'cors';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 app.use(cors());
