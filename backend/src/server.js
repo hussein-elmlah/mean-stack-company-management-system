@@ -2,8 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import userRoutes from './routes/userRoutes.mjs';
-import projectRoutes from './routes/projectRoutes.mjs';
+import userRoutes from './routes/userRoutes.js';
+import projectRoutes from './routes/projectRoutes.js';
 import cors from 'cors';
 
 const __filename = fileURLToPath(import.meta.url);
