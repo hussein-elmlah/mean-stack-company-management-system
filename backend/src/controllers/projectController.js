@@ -1,6 +1,6 @@
-const Project = require('../models/Project');
+import Project from '../models/Project.js';
 
-exports.getAllProjects = async (req, res) => {
+export async function getAllProjects(req, res) {
   try {
     const projects = await Project.find();
     res.json(projects);
@@ -8,9 +8,9 @@ exports.getAllProjects = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+}
 
-exports.getProjectById = async (req, res) => {
+export async function getProjectById(req, res) {
   try {
     const projectId = req.params.projectId;
     const project = await Project.findById(projectId);
@@ -24,9 +24,9 @@ exports.getProjectById = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+}
 
-exports.createProject = async (req, res) => {
+export async function createProject(req, res) {
   try {
     const projectData = req.body;
     const newProject = await Project.create(projectData);
@@ -35,9 +35,9 @@ exports.createProject = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+}
 
-exports.updateProject = async (req, res) => {
+export async function updateProject(req, res) {
   try {
     const projectId = req.params.projectId;
     const updatedFields = req.body;
@@ -53,9 +53,9 @@ exports.updateProject = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+}
 
-exports.deleteProject = async (req, res) => {
+export async function deleteProject(req, res) {
   try {
     const projectId = req.params.projectId;
 
@@ -70,4 +70,4 @@ exports.deleteProject = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+}

@@ -1,22 +1,22 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const userRoutes = require('./routes/userRoutes');
-const projectRoutes = require('./routes/projectRoutes');
-const cors = require('cors');
+import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import userRoutes from './routes/userRoutes.js';
+import projectRoutes from './routes/projectRoutes.js';
+import cors from 'cors';
+import connectDB from './databases/dbConnection.js'
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 app.use(cors());
 
 // Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
-// Connect to MongoDB (replace 'your-database-name' with your actual database name)
-mongoose.connect('mongodb://localhost/mean-stack-db', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.on('connected', () => {
-  console.log('Connected to MongoDB');
-});
+// Connect to MongoDB
+connectDB();
 
 // Use Routes
 app.use('/users', userRoutes);
