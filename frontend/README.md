@@ -1,9 +1,5 @@
 # Frontend
 
-This is the frontend part of the MEAN stack project.
-
-## frontend
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.
 
 ## Development server
