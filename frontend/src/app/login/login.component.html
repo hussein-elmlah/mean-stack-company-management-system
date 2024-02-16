@@ -1,0 +1,29 @@
+<div>
+    <div class="loginpage">
+        <form [formGroup]="loginForm" (ngSubmit)="handleloginform()" >
+            <label for="email" class="mb-2">Email</label>
+            <input type="text" class="form-control mb-2" placeholder="Enter your email" formControlName="email" />
+            @if(loginForm.controls['email'].invalid && (loginForm.controls['email'].touched || loginForm.controls['email'].dirty)){
+                @if(loginForm.controls['email'].errors?.["required"]){
+                 <div class="alert alert-danger">the email must be required</div>
+                } @if(loginForm.controls['email'].errors?.["email"]){
+                    <div class="alert alert-danger">the email must be in right format</div>
+                }
+         }
+            <label for="password" class="mb-2">Password</label>
+            <input type="password" class="form-control mb-2" placeholder="Enter your password" formControlName="password" />
+            @if(loginForm.controls['password'].invalid && loginForm.controls['password'].touched){
+                @if(loginForm.controls['password'].errors?.["required"]){
+                 <div class="alert alert-danger">the password must be required</div>
+                }@else if(loginForm.controls['password'].errors?.["minlength"]){
+                    <div class="alert alert-danger">the password should be at least 8 characters </div>
+                }
+            }
+
+        <button class="mb-2 mt-2" [disabled]="!(loginForm.controls['email'].valid && loginForm.controls['password'].valid)">Login</button>
+    </form>
+    </div>
+    <div class="text-center">
+        <p>Don't have account ? <a routerLink="/signup">Register</a> </p>
+    </div>
+</div>
