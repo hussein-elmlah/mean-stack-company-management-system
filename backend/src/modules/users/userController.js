@@ -1,6 +1,6 @@
-import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import User from '../../../databases/models/User.js';
 
 const generateToken = (user) => {
   const tokenSecret = 'yourSecretKey'; // Replace with your actual secret key
@@ -13,24 +13,25 @@ const register = async(req, res) =>{
   try {
     const { username, password, role, fullName, dateOfBirth, address, jobLevel, mobileNumber, contract } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
+    const isExist=await User.findOne({username});
+    if(isExist){
+      res.status(400).json({message:"this username is already in user try another username please"})
+    }
+    else {
+      const newUser = await User.create({
+        username,
+        password: hashedPassword,
+        role,
+        fullName,
+        dateOfBirth,
+        address,
+        jobLevel,
+        mobileNumber,
+        contract,
+      });
+      res.status(201).json({message:"user registered successfully",newUser})
 
-    const user = new User({
-      username,
-      password: hashedPassword,
-      role,
-      fullName,
-      dateOfBirth,
-      address,
-      jobLevel,
-      mobileNumber,
-      contract,
-    });
-
-    await user.save();
-
-    const token = generateToken(user);
-
-    res.status(201).json({ token });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -100,7 +101,7 @@ function logout(req, res) {
 }
 
 
-module.exports={
+export{
   register,
   login,
   getUserProfile,

@@ -1,8 +1,8 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import userRoutes from './routes/userRoutes.js';
-import projectRoutes from './routes/projectRoutes.js';
+import userRoutes from './src/modules/users/userRoutes.js';
+import projectRoutes from './src/modules/projects/projectRoutes.js';
 import cors from 'cors';
 import connectDB from './databases/dbConnection.js'
 

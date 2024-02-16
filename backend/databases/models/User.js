@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     endDate: { type: Date },
     salary: { type: Number },
   },
-});
+},{timestamp:true});
 
 const User = mongoose.model('User', userSchema);
 
