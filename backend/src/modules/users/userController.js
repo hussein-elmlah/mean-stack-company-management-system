@@ -9,7 +9,7 @@ const generateToken = (user) => {
   return jwt.sign({ userId: user._id, username: user.username, role: user.role }, tokenSecret, { expiresIn });
 };
 
-export async function register(req, res) {
+const register = async(req, res) =>{
   try {
     const { username, password, role, fullName, dateOfBirth, address, jobLevel, mobileNumber, contract } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -36,8 +36,7 @@ export async function register(req, res) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
-
-export async function login(req, res) {
+const login = async(req, res) =>{
   try {
     const { username, password } = req.body;
 
@@ -61,8 +60,7 @@ export async function login(req, res) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
-
-export async function getUserProfile(req, res) {
+const getUserProfile = async(req, res) =>{
   try {
     const userId = req.user.userId; // Extracted from the JWT
     const user = await User.findById(userId);
@@ -78,7 +76,7 @@ export async function getUserProfile(req, res) {
   }
 }
 
-export async function updateUserProfile(req, res) {
+const updateUserProfile = async(req, res) =>{
   try {
     const userId = req.user.userId; // Extracted from the JWT
     const updatedFields = req.body; // Assuming all fields are updatable
@@ -96,7 +94,17 @@ export async function updateUserProfile(req, res) {
   }
 }
 
-export function logout(req, res) {
+function logout(req, res) {
   // You may implement additional logic for logout, such as invalidating tokens
   res.json({ message: 'Logout successful' });
+}
+
+
+module.exports={
+  register,
+  login,
+  getUserProfile,
+  updateUserProfile,
+  logout
+
 }
