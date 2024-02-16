@@ -30,7 +30,7 @@ const projectSchema = new mongoose.Schema({
   downloadLink: { type: String },
   projectPictures: [{ type: String }],
   description: { type: String },
-});
+},{timestamp:true});
 
 const Project = mongoose.model('Project', projectSchema);
 
