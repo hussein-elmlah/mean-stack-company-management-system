@@ -1,4 +1,4 @@
-import Project from '../models/Project.js';
+import Project from '../../../databases/models/Project.js';
 
 export async function getAllProjects(req, res) {
   try {
