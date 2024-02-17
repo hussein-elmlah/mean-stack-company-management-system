@@ -1,0 +1,36 @@
+:root {
+  --icons-color: #c38738;
+  --gray: #757575;
+}
+.section-header h2 {
+  color: #c38738;
+  position: relative;
+}
+.section-header h2::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  left: 47%;
+  top: 130%;
+  background-color: #c38738;
+}
+.section-header p {
+  color: #757575;
+  font-size: 0.9rem;
+}
+.single-service {
+  display: flex !important;
+  align-items: baseline;
+  /* justify-content: space-between; */
+}
+
+.single-service i {
+  color: #c38738;
+  font-size: 2.2rem;
+  margin-left: 4px;
+}
+.single-service p {
+  font-size: 1.2rem;
+}
