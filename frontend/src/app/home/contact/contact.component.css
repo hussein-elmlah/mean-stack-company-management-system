@@ -1,0 +1,60 @@
+.contactpage{
+    text-align: center;
+    margin: 20px 0px;
+}
+h2{
+    font-size: 40px;
+    color: #DB6037;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.contactpage .container .row div{
+    margin: 10px 0px 10px 0px;
+}
+.sendbutton{
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #DB6037;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    transition: all 0.5s ease-in-out;
+    border: 0px;
+}
+.sendbutton:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(77, 77, 77);
+    cursor: pointer;
+}
+form{
+    border-radius: 10px;
+    border: 0px;
+    box-shadow: 3px 3px 20px 10px rgb(228, 228, 228);
+    padding: 20px;
+}
+input,textarea{
+    text-align: right;
+}
+.card{
+    border: 0px;
+    box-shadow: 5px 5px 10px 5px rgb(180, 180, 180);
+    padding: 20px;
+    height: 300px;
+    transition: all 0.4s ease-in-out;
+}
+.card:hover{
+    background-color: black;
+    color: white;
+}
+.card i{
+    font-size: 50px;
+    color: #DB6037;
+}
+.card p{
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.address p{
+    font-size: 15px;
+}
