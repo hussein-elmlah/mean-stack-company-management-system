@@ -2,11 +2,20 @@
     text-align: center;
     margin: 20px 0px;
 }
-h2{
-    font-size: 40px;
-    color: #DB6037;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
+h2 {
+    color: #c38738;
+    position: relative;
+  }
+h2::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    left: 47%;
+    top: 130%;
+    background-color: #c38738;
+  }
 p{
     font-size: 20px;
     font-weight: bold;
