@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from '../../../databases/models/User.js';
+import catchAsync from '../../../utilities/catchAsync.js';
 
 const generateToken = (user) => {
   const tokenSecret = 'yourSecretKey'; // Replace with your actual secret key
@@ -9,20 +10,15 @@ const generateToken = (user) => {
   return jwt.sign({ userId: user._id, username: user.username, role: user.role }, tokenSecret, { expiresIn });
 };
 
-const register = async(req, res) =>{
-  try {
-    const { username, password, role, fullName, dateOfBirth, address, jobLevel, mobileNumber, contract } = req.body;
+const register = catchAsync(async(req, res,next) =>{
+    const { username, password, firstName, email,lastName, dateOfBirth, address, jobLevel, mobileNumber, contract } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const isExist=await User.findOne({username});
-    if(isExist){
-      res.status(400).json({message:"this username is already in user try another username please"})
-    }
-    else {
       const newUser = await User.create({
         username,
         password: hashedPassword,
-        role,
-        fullName,
+        firstName,
+        email,
+        lastName,
         dateOfBirth,
         address,
         jobLevel,
@@ -30,13 +26,7 @@ const register = async(req, res) =>{
         contract,
       });
       res.status(201).json({message:"user registered successfully",newUser})
-
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-}
+})
 const login = async(req, res) =>{
   try {
     const { username, password } = req.body;

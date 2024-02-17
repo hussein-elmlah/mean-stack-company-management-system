@@ -4,7 +4,6 @@ const catchAsync =  fn =>{
         await fn(req,res,next)
       }
       catch (error) {
-    // next(new AppError(error.message,415))
     next(error)
   }
     }
