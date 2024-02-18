@@ -1,14 +1,41 @@
 import mongoose from 'mongoose';
-
+import validator from 'validator';
 const userSchema = new mongoose.Schema({
-  username: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ['client', 'junior', 'senior', 'branchManager', 'companyOwner'], required: true },
-  fullName: { type: String },
+  username: { type: String, unique: true, required: [true, 'username is required! 😒'],
+ validate: {
+        validator: async function (value) {
+          const existingUser = await this.constructor.findOne({ username: value });
+          return !existingUser;
+        },
+        message: 'Please enter another username 🤨',
+      },
+},
+  password: { type: String, required: [true, 'password is required ! 😒'] },
+  role: { type: String, enum: ['client', 'junior', 'senior', 'branchManager', 'companyOwner'], required: true,
+default: 'client'
+},
+  firstName: { type: String, required: [true, 'firstName is required! 😒']   },
+  lastName: { type: String, required: [true, 'lastName is required! 😒']   },
   dateOfBirth: { type: Date },
   address: { type: String },
   jobLevel: { type: String },
-  mobileNumber: { type: String },
+  mobileNumber: { type: String,
+  validate: [validator.isMobilePhone,'Please, Enter a valid phone number' ],
+  require: [true, 'mobile number is reuired! 😒']
+},
+email:{
+  type:String,
+  unique: true,
+  validate: [{validator: validator.isEmail, message :'Please enter valid email 😑'},{
+        validator: async function (value) {
+          const existingUser = await this.constructor.findOne({ email: value });
+          return !existingUser;
+        },
+        message: 'Please enter another email as email is already exist 🤨',
+  }
+],
+  required: [true,'Please Enter email']
+},
   contract: {
     number: { type: String },
     startDate: { type: Date },
