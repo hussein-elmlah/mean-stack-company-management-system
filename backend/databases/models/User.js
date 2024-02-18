@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
           const existingUser = await this.constructor.findOne({ username: value });
           return !existingUser;
         },
-        message: 'Please enter another username',
+        message: 'Please enter another username 🤨',
       },
 },
   password: { type: String, required: [true, 'password is required ! 😒'] },
@@ -25,7 +25,15 @@ default: 'client'
 },
 email:{
   type:String,
-  validate: [validator.isEmail, 'Please enter valid email 😑'],
+  unique: true,
+  validate: [{validator: validator.isEmail, message :'Please enter valid email 😑'},{
+        validator: async function (value) {
+          const existingUser = await this.constructor.findOne({ email: value });
+          return !existingUser;
+        },
+        message: 'Please enter another email as email is already exist 🤨',
+  }
+],
   required: [true,'Please Enter email']
 },
   contract: {
