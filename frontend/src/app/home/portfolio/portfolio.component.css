@@ -1,0 +1,14 @@
+.section-header h2 {
+  color: #c38738;
+  position: relative;
+}
+.section-header h2::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  left: 47%;
+  top: 130%;
+  background-color: #c38738;
+}

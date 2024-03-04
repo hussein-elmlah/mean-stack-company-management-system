@@ -1,0 +1,44 @@
+footer {
+  background-image: linear-gradient(
+    225deg,
+    hsl(34deg 81% 21%) 0%,
+    hsl(33deg 73% 21%) 16%,
+    hsl(33deg 67% 21%) 21%,
+    hsl(33deg 62% 21%) 24%,
+    hsl(33deg 58% 20%) 28%,
+    hsl(33deg 59% 18%) 32%,
+    hsl(34deg 61% 15%) 38%,
+    hsl(34deg 66% 12%) 45%,
+    hsl(34deg 70% 9%) 54%,
+    hsl(34deg 70% 8%) 66%,
+    hsl(34deg 70% 5%) 81%,
+    hsl(0deg 0% 0%) 100%
+  );
+  color: white;
+}
+img {
+  width: 40%;
+}
+.social-icons {
+  display: flex;
+  justify-content: space-evenly;
+  transition: all 0.4s ease-in-out;
+}
+.social-icons i:hover {
+  font-size: 2.5rem;
+}
+i {
+  color: #c38738;
+  font-size: 1.6rem;
+}
+span {
+  font-size: 1.2rem;
+}
+@media (max-width: 991px) {
+  .left {
+    margin-bottom: 40px;
+  }
+  .row {
+    justify-content: center;
+  }
+}

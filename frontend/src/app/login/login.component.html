@@ -1,35 +1,35 @@
 <div>
   <div class="loginpage rounded-2">
     <form [formGroup]="loginForm" (ngSubmit)="handleloginform()">
-      <label for="email" class="mb-2">Email</label>
+      <label for="email" class="mb-2">البريد الالكتروني</label>
       <input
         type="text"
         class="form-control mb-2"
-        placeholder="Enter your email"
+        placeholder="ادخل البريد الالكتروني"
         formControlName="email"
       />
       @if(loginForm.controls['email'].invalid &&
       (loginForm.controls['email'].touched ||
       loginForm.controls['email'].dirty)){
       @if(loginForm.controls['email'].errors?.["required"]){
-      <div class="alert alert-danger">the email must be required</div>
+      <div class="alert alert-danger">يجب ادخال البريد الالكتروني</div>
       } @if(loginForm.controls['email'].errors?.["email"]){
-      <div class="alert alert-danger">the email must be in right format</div>
+      <div class="alert alert-danger">يجب ادخال البريد الالكتروني بشكل صحيح</div>
       } }
-      <label for="password" class="mb-2">Password</label>
+      <label for="password" class="mb-2">كلمة السر</label>
       <input
         type="password"
         class="form-control mb-2"
-        placeholder="Enter your password"
+        placeholder="ادخل كلمة السر"
         formControlName="password"
       />
       @if(loginForm.controls['password'].invalid &&
       loginForm.controls['password'].touched){
       @if(loginForm.controls['password'].errors?.["required"]){
-      <div class="alert alert-danger">the password must be required</div>
+      <div class="alert alert-danger">يجب ادخال كلمة السر</div>
       }@else if(loginForm.controls['password'].errors?.["minlength"]){
       <div class="alert alert-danger">
-        the password should be at least 8 characters
+        يجب ادخال على الاقل 8 حروف لكلمة السر
       </div>
       } }
 
@@ -42,11 +42,11 @@
           )
         "
       >
-        Login
+        تسجيل الدخول
       </button>
     </form>
   </div>
   <div class="text-center">
-    <p>Don't have account ? <a routerLink="/signup">Register</a></p>
+    <p>ليس لديك حساب ؟  <a routerLink="/signup">انشئ حساب</a></p>
   </div>
 </div>

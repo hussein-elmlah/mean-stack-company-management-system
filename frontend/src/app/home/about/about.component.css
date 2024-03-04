@@ -1,0 +1,53 @@
+.about{
+    text-align: center;
+    margin: 20px 0px;
+}
+h2 {
+    color: #c38738;
+    position: relative;
+  }
+h2::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    left: 47%;
+    top: 130%;
+    background-color: #c38738;
+  }
+p{
+    font-size: 20px;
+    font-weight: bold;
+}
+.imagebox{
+    box-shadow:5px 5px 30px 10px rgb(179, 179, 179);
+    margin: 30px;
+    transition: all 0.4s ease-in-out;
+}
+.imagebox:hover{
+    transform: scale(1.1,1.1);
+}
+.aboutdiv{
+    align-items: center;
+    margin: 20px 0px 20px 0px;
+}
+
+.working{
+    margin: 20px 0px 20px 0px;
+    padding: 50px 0px 50px 40px;
+    background-color: black;
+    color: #DB6037;
+    text-align: center;
+}
+h1{
+    font-size: 50px;
+}
+h4{
+    color: white;
+}
+@media (max-width:767px) {
+    .working .container .row div{
+        margin-top: 30px;
+    }
+}

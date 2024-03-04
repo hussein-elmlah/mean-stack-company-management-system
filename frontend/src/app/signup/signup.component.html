@@ -1,87 +1,109 @@
-<div>
-  <div class="container rounded-2">
+<div class="signup">
+  <div>
     <form [formGroup]="signUpForm" (ngSubmit)="handleFormSubmit()">
       <!-- First Name -->
       <div class="mb-2">
-        <label for="firstNameInput" class="form-label">First Name</label>
+        <label for="firstNameInput" class="form-label">الاسم الاول</label>
         <input
           type="text"
           class="form-control"
           id="firstNameInput"
           formControlName="firstName"
-          placeholder="Enter your First Name"
+          placeholder="ادخل الاسم الاول"
         />
 
         @if(signUpForm.controls['firstName'].invalid &&
         signUpForm.controls['firstName'].touched){
         <div class="form-text text-danger">
           @if(signUpForm.controls['firstName'].errors?.['required']){
-          <small>This field is required</small>
+          <small>يجب ادخال الاسم الاول</small>
           }
         </div>
         }
       </div>
 
       <div class="mb-2">
-        <label for="lastNameInput" class="form-label">Last Name</label>
+        <label for="lastNameInput" class="form-label">الاسم الاخير</label>
         <input
           type="text"
           class="form-control"
           id="lastNameInput"
           formControlName="lastName"
-          placeholder="Enter your Last Name"
+          placeholder="ادخل الاسم الاخير"
         />
 
         @if(signUpForm.controls['lastName'].invalid &&
         signUpForm.controls['lastName'].touched){
         <div class="form-text text-danger">
           @if(signUpForm.controls['lastName'].errors?.['required']){
-          <small>This field is required</small>
+          <small>يجب ادخال الاسم الاخير</small>
+          }
+        </div>
+        }
+      </div>
+
+
+
+      <div class="mb-2">
+        <label for="userNameInput" class="form-label">اسم المستخدم</label>
+        <input
+          type="text"
+          class="form-control"
+          id="userNameInput"
+          formControlName="userName"
+          placeholder="ادخل اسم المستخدم"
+        />
+
+        @if(signUpForm.controls['userName'].invalid &&
+        signUpForm.controls['userName'].touched){
+        <div class="form-text text-danger">
+          @if(signUpForm.controls['userName'].errors?.['required']){
+          <small>يجب ادخال اسم المستخدم</small>
           }
         </div>
         }
       </div>
 
       <div class="mb-2">
-        <label for="emailInput" class="form-label">Gmail</label>
+        <label for="emailInput" class="form-label">البريد الالكتروني</label>
         <input
           type="text"
           class="form-control"
           id="emailInput"
           formControlName="email"
-          placeholder="Enter your Email"
+          placeholder="ادخل البريد الالكتروني"
         />
 
         @if(signUpForm.controls['email'].invalid &&
         signUpForm.controls['email'].touched){
         <div class="form-text text-danger">
           @if(signUpForm.controls['email'].errors?.['required']){
-          <small>This field is required</small>
+          <small>يجب ادخال البريد الالكتروني</small>
           } @if(signUpForm.controls['email'].errors?.["email"]){
-          <div class="form-text text-danger">Invalid Email Format</div>
+          <div class="form-text text-danger">يجب ادخال البريد الالكتروني بشكل صحيح</div>
           }
         </div>
         }
       </div>
 
       <div class="mb-2">
-        <label for="passwordInput" class="form-label">Password</label>
+        <label for="passwordInput" class="form-label">كلمة السر</label>
         <input
-          type="text"
+          type="password"
           class="form-control"
           id="passwordInput"
           formControlName="password"
-          placeholder="Enter your Password"
+          placeholder="ادخل كلمة السر"
         />
 
         @if(signUpForm.controls['password'].invalid &&
         signUpForm.controls['password'].touched){
         <div class="form-text text-danger">
           @if(signUpForm.controls['password'].errors?.['required']){
-          <small>This field is required</small>
+          <small>يجب ادخال كلمة السر</small>
           }@else if(signUpForm.controls['password'].errors?.["minlength"]){
           <div class="form-text text-danger">
-            the password should be at least 8 characters
+            يجب ادخال على الاقل 8 حروف لكلمة السر
           </div>
           }
         </div>
@@ -99,11 +121,11 @@
           )
         "
       >
-        Sign Up
+        انشئ حساب
       </button>
     </form>
   </div>
   <div class="text-center">
-    <p>Already have an account ? <a routerLink="/login">Log In</a></p>
+    <p>هل لديك حساب بالفعل ؟ <a routerLink="/login">تسجيل دخول</a></p>
   </div>
 </div>
