@@ -7,7 +7,7 @@ yarn-error.log
 # .env
 
 # Ignore uploads directory
-# uploads/
+uploads/
 
 # Compiled output
 /dist
