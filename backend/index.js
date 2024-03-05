@@ -1,39 +1,64 @@
 import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import fs from 'fs';
+import path from 'path';
+import connectDB from './databases/dbConnection.js';
+import routes from './src/routes.js';
+import errorHandler from './middlewares/errorHandler.js';
+import 'dotenv/config';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import userRoutes from './src/modules/users/userRoutes.js';
-import projectRoutes from './src/modules/projects/projectRoutes.js';
-import cors from 'cors';
-import connectDB from './databases/dbConnection.js'
-import globalErrorHandler from './src/modules/errorHandeller/errorController.js'
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { port } from './config.env.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-app.use(cors());
 
-// Middleware
+const uploadImageFolder = path.join(__dirname, 'uploads', 'images');
+if (!fs.existsSync(uploadImageFolder)) {
+  fs.mkdirSync(uploadImageFolder, { recursive: true });
+}
+
+const uploadFileFolder = path.join(__dirname, 'uploads', 'files');
+if (!fs.existsSync(uploadFileFolder)) {
+  fs.mkdirSync(uploadFileFolder, { recursive: true });
+}
+
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+
+app.use(helmet());
 app.use(express.json());
 
-// Connect to MongoDB
-connectDB();
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
 
-// Use Routes
-app.use('/users', userRoutes);
-app.use('/projects', projectRoutes);
+app.use(routes);
 
-// Serve static files (Assuming your Angular build is in the frontend/dist directory)
-app.use(express.static(__dirname + '/frontend/dist'));
-
-// Handle undefined routes - serve the Angular app for any other route
-app.all('*', (req, res) => {
-  res.sendFile(__dirname + '/frontend/dist/index.html');
+app.get('*', (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
-app.use(globalErrorHandler)
+app.use(errorHandler);
 
-// Start the server
-const port = process.env.PORT || 3000;
+process.on('uncaughtException', (exception) => {
+  console.log('Uncaught exception occurred:\n', exception);
+  // here use process.exit(1); and use process manager to restart at any stop in deployment phase.
+});
+process.on('unhandledRejection', (exception) => {
+  console.log('unhandled Rejection occurred:\n', exception);
+  // here use process.exit(1); and use process manager to restart at any stop in deployment phase.
+});
+
+connectDB();
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

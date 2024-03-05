@@ -1,6 +1,7 @@
-import Project from '../../../databases/models/Project.js';
+import Project from './project.model.js';
+import asyncHandler from '../../../lib/asyncHandler.js';
 
-export async function getAllProjects(req, res) {
+export const getAllProjects = asyncHandler(async (req, res) => {
   try {
     const projects = await Project.find();
     res.json(projects);
@@ -8,11 +9,11 @@ export async function getAllProjects(req, res) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-}
+});
 
-export async function getProjectById(req, res) {
+export const getProjectById = asyncHandler(async (req, res) => {
   try {
-    const projectId = req.params.projectId;
+    const { projectId } = req.params;
     const project = await Project.findById(projectId);
 
     if (!project) {
@@ -24,9 +25,9 @@ export async function getProjectById(req, res) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-}
+});
 
-export async function createProject(req, res) {
+export const createProject = asyncHandler(async (req, res) => {
   try {
     const projectData = req.body;
     const newProject = await Project.create(projectData);
@@ -35,11 +36,11 @@ export async function createProject(req, res) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-}
+});
 
-export async function updateProject(req, res) {
+export const updateProject = asyncHandler(async (req, res) => {
   try {
-    const projectId = req.params.projectId;
+    const { projectId } = req.params;
     const updatedFields = req.body;
 
     const updatedProject = await Project.findByIdAndUpdate(projectId, updatedFields, { new: true });
@@ -53,11 +54,11 @@ export async function updateProject(req, res) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-}
+});
 
-export async function deleteProject(req, res) {
+export const deleteProject = asyncHandler(async (req, res) => {
   try {
-    const projectId = req.params.projectId;
+    const { projectId } = req.params;
 
     const deletedProject = await Project.findByIdAndDelete(projectId);
 
@@ -70,4 +71,4 @@ export async function deleteProject(req, res) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-}
+});
