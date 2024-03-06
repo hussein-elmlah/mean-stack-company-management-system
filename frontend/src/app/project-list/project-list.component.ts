@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../../services/project.service';
 import { CommonModule } from '@angular/common';
+import { PaginationComponent } from '../pagination/pagination.component';
 
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PaginationComponent],
   styleUrls: ['./project-list.component.css']
 })
+
 export class ProjectListComponent implements OnInit {
   projects: any[] = [];
   currentPage: number = 1;
@@ -32,17 +34,8 @@ export class ProjectListComponent implements OnInit {
     );
   }
 
-  prevPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.getAllProjects();
-    }
-  }
-
-  nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.getAllProjects();
-    }
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.getAllProjects();
   }
 }
