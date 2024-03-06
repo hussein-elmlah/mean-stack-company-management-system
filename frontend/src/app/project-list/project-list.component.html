@@ -1,15 +1,31 @@
 <div class="project-list">
     <div *ngFor="let project of projects">
       <!-- Display project information here -->
-      <h5 class="card-title">Project Name: {{ project.name }}</h5>
-      <p class="card-text">Description: {{ project.description }}</p>
-      
-      <!-- Display project pictures -->
-      <div class="project-pictures">
-        <img *ngFor="let picture of project.projectPictures" [src]="picture" alt="Project Picture">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Project Name: {{ project.name }}</h5>
+          <p class="card-text">Description: {{ project.description }}</p>
+          
+          <!-- Carousel for project pictures -->
+          <div [id]="'carousel' + project.id" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div *ngFor="let picture of project.projectPictures; let i = index" class="carousel-item" [class.active]="i === 0">
+                <img [src]="picture" class="d-block w-100" alt="Project Picture">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel' + project.id" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel' + project.id" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          
+          <!-- Add more fields as needed -->
+        </div>
       </div>
-      
-      <!-- Add more fields as needed -->
     </div>
   
     <!-- Pagination controls -->

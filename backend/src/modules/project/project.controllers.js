@@ -2,13 +2,45 @@ import Project from './project.model.js';
 import asyncHandler from '../../../lib/asyncHandler.js';
 
 export const getAllProjects = asyncHandler(async (req, res) => {
-  try {
-    const projects = await Project.find();
-    res.json(projects);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+  // Pagination parameters
+  console.log('getAllProjects', req.query.project);
+  const page = parseInt(req.query.page, 10) || 1; // Default to page 1
+  const limit = parseInt(req.query.limit, 10) || 10; // Default limit to 10 projects per page
+
+  console.log('page', page, '/n/n', 'limit', limit);
+  // Filter parameters
+  const filters = {};
+
+  // Apply filters based on query parameters
+  if (req.query.type) {
+    filters.type = req.query.type;
   }
+  if (req.query.owner) {
+    filters.owner = req.query.owner;
+  }
+  // Add more filter conditions as needed
+
+  // Calculate the index of the first project to retrieve
+  const startIndex = (page - 1) * limit;
+
+  // Fetch projects with pagination and filtering
+  const projects = await Project.find(filters)
+    .skip(startIndex)
+    .limit(limit);
+
+  // Count total number of projects matching the filters
+  const totalProjects = await Project.countDocuments(filters);
+
+  // Calculate total number of pages
+  const totalPages = Math.ceil(totalProjects / limit);
+
+  // Response with paginated projects and pagination metadata
+  res.json({
+    projects,
+    currentPage: page,
+    totalPages,
+    totalProjects,
+  });
 });
 
 export const getProjectById = asyncHandler(async (req, res) => {

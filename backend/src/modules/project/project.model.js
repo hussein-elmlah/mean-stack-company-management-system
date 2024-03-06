@@ -2,19 +2,28 @@ import mongoose from 'mongoose';
 
 const projectSchema = new mongoose.Schema(
   {
+    projectName: { type: String, required: true }, // Add project name field
+    projectNumber: { type: String, required: true, unique: true }, // Add unique project number field
     client: {
-      fullName: { type: String, required: true },
-      mobileNumber: { type: String, required: true },
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+      fullName: { type: String },
+      mobileNumber: { type: String },
     },
-    owner: { type: String, required: true },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
     sender: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User', // Assuming there's a User model for senders
+      ref: 'User',
       required: true,
     },
-    dateOfSubmission: { type: Date, required: true },
-    type: { type: String, required: true },
-    participatingDepartments: [{ type: String }],
+    dateOfSubmission: { type: Date },
+    type: { type: String },
+    participatingDepartments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Department' }],
     numberOfFloors: { type: Number },
     landArea: { type: Number },
     buildingArea: { type: Number },
@@ -26,13 +35,13 @@ const projectSchema = new mongoose.Schema(
     hoursExpectedToComplete: { type: Number },
     expectedCompletionDate: { type: Date },
     actualCompletionDate: { type: Date },
-    workingDepartments: [{ type: String }],
+    workingDepartments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Department' }],
     hoursExpectedPerDepartment: { type: Map, of: Number },
     downloadLink: { type: String },
     projectPictures: [{ type: String }],
     description: { type: String },
   },
-  { timaStamp: true },
+  { timestamps: true },
 );
 
 const Project = mongoose.model('Project', projectSchema);
