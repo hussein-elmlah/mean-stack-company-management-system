@@ -1,0 +1,22 @@
+<div class="project-list">
+    <div *ngFor="let project of projects">
+      <!-- Display project information here -->
+      <h5 class="card-title">Project Name: {{ project.name }}</h5>
+      <p class="card-text">Description: {{ project.description }}</p>
+      
+      <!-- Display project pictures -->
+      <div class="project-pictures">
+        <img *ngFor="let picture of project.projectPictures" [src]="picture" alt="Project Picture">
+      </div>
+      
+      <!-- Add more fields as needed -->
+    </div>
+  
+    <!-- Pagination controls -->
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+  
