@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const projectSchema = new mongoose.Schema(
   {
-    projectName: { type: String, required: true }, // Add project name field
-    projectNumber: { type: String, required: true, unique: true }, // Add unique project number field
+    name: { type: String, required: true }, // Add project name field
+    number: { type: String, required: true, unique: true }, // Add unique project number field
     client: {
       user: {
         type: mongoose.Schema.Types.ObjectId,
