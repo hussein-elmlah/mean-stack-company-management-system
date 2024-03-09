@@ -2,8 +2,7 @@ import mongoose from 'mongoose';
 
 const projectSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true }, // Add project name field
-    number: { type: String, required: true, unique: true }, // Add unique project number field
+    _id: { type: mongoose.Schema.Types.ObjectId, required: true },
     client: {
       user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -19,24 +18,28 @@ const projectSchema = new mongoose.Schema(
     sender: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
     },
-    dateOfSubmission: { type: Date },
-    type: { type: String },
     participatingDepartments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Department' }],
-    numberOfFloors: { type: Number },
-    landArea: { type: Number },
-    buildingArea: { type: Number },
-    totalBuildingArea: { type: Number },
+    hoursExpectedPerDepartment: { type: Map, of: Number },
     annex: {
       upper: { type: Boolean, default: false },
       land: { type: Boolean, default: false },
     },
+    name: { type: String, required: true },
+    number: { type: Number, required: true },
+    location: { type: String },
+    planNumber: { type: String },
+    plotNumber: { type: String },
+    landPerimeter: { type: Number },
+    landArea: { type: Number },
+    dateOfSubmission: { type: Date },
+    type: { type: String },
+    numberOfFloors: { type: Number },
+    buildingArea: { type: Number },
+    totalBuildingArea: { type: Number },
     hoursExpectedToComplete: { type: Number },
     expectedCompletionDate: { type: Date },
     actualCompletionDate: { type: Date },
-    workingDepartments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Department' }],
-    hoursExpectedPerDepartment: { type: Map, of: Number },
     downloadLink: { type: String },
     projectPictures: [{ type: String }],
     description: { type: String },

@@ -1,154 +1,120 @@
-[
-  {
-    "_id": {
-      "$oid": "65b81ca00579b171776d0a9a"
-    },
-    "username": "john_doe",
-    "password": "hashed_password_1",
-    "role": "senior",
-    "firstName": "John",
-    "lastName": "Doe",
-    "dateOfBirth": "1985-08-15",
-    "address": "123 Main Street, City",
-    "jobLevel": "Senior Engineer",
-    "mobileNumber": "555-1234",
-    "email": "john@example.com",
-    "contract": {
-      "number": "CONTRACT001",
-      "startDate": "2022-01-01",
-      "endDate": "2023-01-01",
-      "salary": 80000
-    }
-  },
-  {
-    "_id": {
-      "$oid": "65b81ca00579b171776d0a9b"
-    },
-    "username": "jane_smith",
-    "password": "hashed_password_2",
-    "role": "junior",
-    "firstName": "Jane",
-    "lastName": "Smith",
-    "dateOfBirth": "1990-05-20",
-    "address": "456 Oak Avenue, Town",
-    "jobLevel": "Junior Engineer",
-    "mobileNumber": "555-5678",
-    "email": "jane@example.com",
-    "contract": {
-      "number": "CONTRACT002",
-      "startDate": "2022-02-01",
-      "endDate": "2023-02-01",
-      "salary": 60000
-    }
-  },
-  {
-    "_id": {
-      "$oid": "65b81ca00579b171776d0a9c"
-    },
-    "username": "client_a",
-    "password": "hashed_password_3",
-    "role": "client",
-    "firstName": "Client",
-    "lastName": "A",
-    "dateOfBirth": "1978-12-10",
-    "address": "789 Elm Street, Village",
-    "mobileNumber": "555-9876",
-    "email": "client_a@example.com"
-  },
-  {
-    "_id": {
-      "$oid": "65b81d950579b171776d0aa5"
-    },
-    "username": "alice_architect",
-    "password": "hashed_password_4",
-    "role": "senior",
-    "firstName": "Alice",
-    "lastName": "Architect",
-    "dateOfBirth": "1980-12-05",
-    "address": "987 Maple Lane, Suburb",
-    "jobLevel": "Senior Architect",
-    "mobileNumber": "555-4321",
-    "email": "alice@example.com",
-    "contract": {
-      "number": "CONTRACT004",
-      "startDate": "2022-03-01",
-      "endDate": "2023-03-01",
-      "salary": 85000
-    }
-  },
-  {
-    "_id": {
-      "$oid": "65b81d950579b171776d0aa6"
-    },
-    "username": "bob_civil",
-    "password": "hashed_password_5",
-    "role": "junior",
-    "firstName": "Bob",
-    "lastName": "Civil",
-    "dateOfBirth": "1992-08-20",
-    "address": "654 Pine Street, City",
-    "jobLevel": "Junior Civil Engineer",
-    "mobileNumber": "555-8765",
-    "email": "bob@example.com",
-    "contract": {
-      "number": "CONTRACT005",
-      "startDate": "2022-04-01",
-      "endDate": "2023-04-01",
-      "salary": 60000
-    }
-  },
-  {
-    "_id": {
-      "$oid": "65b81d950579b171776d0aa7"
-    },
-    "username": "client_b",
-    "password": "hashed_password_6",
-    "role": "client",
-    "firstName": "Client",
-    "lastName": "B",
-    "dateOfBirth": "1985-06-15",
-    "address": "321 Oak Avenue, Town",
-    "mobileNumber": "555-9999",
-    "email": "client_b@example.com"
-  },
-  {
-    "_id": {
-      "$oid": "65b81d950579b171776d0aa8"
-    },
-    "username": "branch_manager",
-    "password": "hashed_password_7",
-    "role": "branchManager",
-    "firstName": "Branch",
-    "lastName": "Manager",
-    "dateOfBirth": "1975-03-10",
-    "address": "456 Cedar Street, City",
-    "mobileNumber": "555-5555",
-    "email": "manager@example.com",
-    "contract": {
-      "number": "CONTRACT006",
-      "startDate": "2022-02-15",
-      "endDate": "2023-02-15",
-      "salary": 95000
-    }
-  },
-  {
-    "_id": {
-      "$oid": "65b81d950579b171776d0aa9"
-    },
-    "username": "owner",
-    "password": "hashed_password_8",
-    "role": "companyOwner",
-    "firstName": "Company",
-    "lastName": "Owner",
-    "dateOfBirth": "1970-01-01",
-    "address": "789 Birch Lane, Suburb",
-    "mobileNumber": "555-0000",
-    "email": "owner@example.com",
-    "contract": {
-      "number": "CONTRACT007",
-      "startDate": "2022-01-01",
-      "endDate": "2023-01-01",
-      "salary": 120000
-    }
+[{
+  "_id": "65b81ca00579b171776d0a9a",
+  "username": "john_doe",
+  "password": "hashed_password_1",
+  "role": "senior",
+  "fullName": "John Doe",
+  "dateOfBirth": "1985-08-15",
+  "address": "123 Main Street, City",
+  "jobLevel": "Senior Engineer",
+  "mobileNumber": "555-1234",
+  "contract": {
+    "number": "CONTRACT001",
+    "startDate": "2022-01-01",
+    "endDate": "2023-01-01",
+    "salary": 80000
   }
-]
+},
+{
+  "_id": "65b81ca00579b171776d0a9b",
+  "username": "jane_smith",
+  "password": "hashed_password_2",
+  "role": "junior",
+  "fullName": "Jane Smith",
+  "dateOfBirth": "1990-05-20",
+  "address": "456 Oak Avenue, Town",
+  "jobLevel": "Junior Engineer",
+  "mobileNumber": "555-5678",
+  "contract": {
+    "number": "CONTRACT002",
+    "startDate": "2022-02-01",
+    "endDate": "2023-02-01",
+    "salary": 60000
+  }
+},
+{
+  "_id": "65b81ca00579b171776d0a9c",
+  "username": "client_a",
+  "password": "hashed_password_3",
+  "role": "client",
+  "fullName": "Client A",
+  "dateOfBirth": "1978-12-10",
+  "address": "789 Elm Street, Village",
+  "mobileNumber": "555-9876"
+},
+{
+  "_id": "65b81d950579b171776d0aa5",
+  "username": "alice_architect",
+  "password": "hashed_password_4",
+  "role": "senior",
+  "fullName": "Alice Architect",
+  "dateOfBirth": "1980-12-05",
+  "address": "987 Maple Lane, Suburb",
+  "jobLevel": "Senior Architect",
+  "mobileNumber": "555-4321",
+  "contract": {
+    "number": "CONTRACT004",
+    "startDate": "2022-03-01",
+    "endDate": "2023-03-01",
+    "salary": 85000
+  }
+},
+{
+  "_id": "65b81d950579b171776d0aa6",
+  "username": "bob_civil",
+  "password": "hashed_password_5",
+  "role": "junior",
+  "fullName": "Bob Civil",
+  "dateOfBirth": "1992-08-20",
+  "address": "654 Pine Street, City",
+  "jobLevel": "Junior Civil Engineer",
+  "mobileNumber": "555-8765",
+  "contract": {
+    "number": "CONTRACT005",
+    "startDate": "2022-04-01",
+    "endDate": "2023-04-01",
+    "salary": 60000
+  }
+},
+{
+  "_id": "65b81d950579b171776d0aa7",
+  "username": "client_b",
+  "password": "hashed_password_6",
+  "role": "client",
+  "fullName": "Client B",
+  "dateOfBirth": "1985-06-15",
+  "address": "321 Oak Avenue, Town",
+  "mobileNumber": "555-9999"
+},
+{
+  "_id": "65b81d950579b171776d0aa8",
+  "username": "branch_manager",
+  "password": "hashed_password_7",
+  "role": "branchManager",
+  "fullName": "Branch Manager",
+  "dateOfBirth": "1975-03-10",
+  "address": "456 Cedar Street, City",
+  "mobileNumber": "555-5555",
+  "contract": {
+    "number": "CONTRACT006",
+    "startDate": "2022-02-15",
+    "endDate": "2023-02-15",
+    "salary": 95000
+  }
+},
+{
+  "_id": "65b81d950579b171776d0aa9",
+  "username": "owner",
+  "password": "hashed_password_8",
+  "role": "companyOwner",
+  "fullName": "Company Owner",
+  "dateOfBirth": "1970-01-01",
+  "address": "789 Birch Lane, Suburb",
+  "mobileNumber": "555-0000",
+  "contract": {
+    "number": "CONTRACT007",
+    "startDate": "2022-01-01",
+    "endDate": "2023-01-01",
+    "salary": 120000
+  }
+}]

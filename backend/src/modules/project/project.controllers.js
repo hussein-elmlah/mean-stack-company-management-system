@@ -3,11 +3,9 @@ import asyncHandler from '../../../lib/asyncHandler.js';
 
 export const getAllProjects = asyncHandler(async (req, res) => {
   // Pagination parameters
-  console.log('getAllProjects', req.query.project);
   const page = parseInt(req.query.page, 10) || 1; // Default to page 1
   const limit = parseInt(req.query.limit, 10) || 10; // Default limit to 10 projects per page
 
-  console.log('page', page, '/n/n', 'limit', limit);
   // Filter parameters
   const filters = {};
 
