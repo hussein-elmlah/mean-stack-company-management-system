@@ -45,7 +45,7 @@ export const routes: Routes = [
         title:"signup page"
     },
     {
-        path:'test',
+        path:'test', // this route should be deleted in production.
         component:ProjectListComponent,
         title:"test page"
     }

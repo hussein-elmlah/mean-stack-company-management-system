@@ -18,15 +18,22 @@ export class ApiService {
       );
   }
 
-  post(endpoint: string, data: any, headers?: HttpHeaders): Observable<any> {
-    return this.http.post(`${this.baseUrl}/${endpoint}`, data, { headers })
+  post(endpoint: string, body: any, headers?: HttpHeaders): Observable<any> {
+    return this.http.post(`${this.baseUrl}/${endpoint}`, body, { headers })
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  put(endpoint: string, data: any, headers?: HttpHeaders): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${endpoint}`, data, { headers })
+  put(endpoint: string, body: any, headers?: HttpHeaders): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${endpoint}`, body, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  patch(endpoint: string, body: any, headers?: HttpHeaders): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/${endpoint}`, body, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -42,6 +49,5 @@ export class ApiService {
   private handleError(error: HttpErrorResponse) {
     // Your error handling logic here
     console.error('An error occurred:', error);
-    return throwError('Something went wrong; please try again later.');
-  }
+    return throwError(()=> new Error('Something went wrong; please try again later.'));  }
 }
