@@ -31,6 +31,9 @@ export const register = asyncHandler(async (req, res, next) => {
   res.status(201).json({ message: 'user registered successfully', newUser });
 });
 
+
+
+
 // export const login = asyncHandler(async (req, res) => {
 //   try {
 //     const { username, password } = req.body;
