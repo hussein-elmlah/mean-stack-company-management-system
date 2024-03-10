@@ -10,13 +10,13 @@ import {
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-user-signup',
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule],
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css',
+  templateUrl: './usersignup.component.html',
+  styleUrl: './usersignup.component.css',
 })
-export class SignupComponent {
+export class UserSignupComponent {
   signUpForm!: FormGroup;
   constructor(private router: Router) {
     this.signUpForm = new FormGroup({
