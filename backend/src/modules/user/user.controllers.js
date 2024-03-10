@@ -2,62 +2,57 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from './user.model.js';
 import asyncHandler from '../../../lib/asyncHandler.js';
+import {hashFunction,compareFunction} from '../../../lib/hashAndCompare.js'
+import { generateTokenUser } from '../../../utils/jwtUtils.js';
 
-const generateToken = (user) => {
-  const tokenSecret = 'yourSecretKey'; // Replace with your actual secret key
-  const expiresIn = '1h';
-
-  return jwt.sign({ userId: user._id, username: user.username, role: user.role }, tokenSecret, { expiresIn });
-};
 
 // eslint-disable-next-line import/prefer-default-export
-export const register = asyncHandler(async (req, res, next) => {
+export const register = asyncHandler(async (req, res) => {
   const {
     username, password, firstName, email, lastName, dateOfBirth, address, jobLevel, mobileNumber, contract,
   } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = await User.create({
-    username,
-    password: hashedPassword,
-    firstName,
-    email,
-    lastName,
-    dateOfBirth,
-    address,
-    jobLevel,
-    mobileNumber,
-    contract,
-  });
-  res.status(201).json({ message: 'user registered successfully', newUser });
+  const hashedPassword = await hashFunction({ plainText: password });
+  try {
+    const newUser = await User.create({
+      username,
+      password: hashedPassword,
+      firstName,
+      email,
+      lastName,
+      dateOfBirth,
+      address,
+      jobLevel,
+      mobileNumber,
+      contract,
+    });
+    res.status(201).json({ message: 'User registered successfully', newUser });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
+export const login=asyncHandler(async(req,res)=>{
+  const { username, password } = req.body;
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const passwordMatch = await compareFunction(password,user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const token = generateTokenUser(user);
+
+    res.json({ token });
+  }
+)
 
 
 
-// export const login = asyncHandler(async (req, res) => {
-//   try {
-//     const { username, password } = req.body;
-
-//     const user = await User.findOne({ username });
-
-//     if (!user) {
-//       return res.status(401).json({ error: 'Invalid credentials' });
-//     }
-
-//     const passwordMatch = await bcrypt.compare(password, user.password);
-
-//     if (!passwordMatch) {
-//       return res.status(401).json({ error: 'Invalid credentials' });
-//     }
-
-//     const token = generateToken(user);
-
-//     res.json({ token });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
 
 // export const getUserProfile = asyncHandler(async (req, res) => {
 //   try {

@@ -1,11 +1,10 @@
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
+import jwt from 'jsonwebtoken';
 
 const { JWT_SECRET, JWT_SECRET_ADMIN } = process.env;
 
-const generateTokenUser = (user) => {
+export const generateTokenUser = (user) => {
   try {
-    if (!user || !user.username || !user._id) {
+    if (!user || !user.username || !user._id || user.role) {
       return new Error('Invalid user object.');
     }
 
@@ -14,7 +13,7 @@ const generateTokenUser = (user) => {
     }
 
     const token = jwt.sign(
-      { username: user.username, id: user._id },
+      { username: user.username, id: user._id, role: user.role },
       JWT_SECRET,
       { expiresIn: '7d' },
     );
@@ -26,9 +25,9 @@ const generateTokenUser = (user) => {
   }
 };
 
-const generateTokenAdmin = (admin) => {
+export const generateTokenAdmin = (admin) => {
   try {
-    if (!admin || !admin.username || !admin._id) {
+    if (!admin || !admin.username || !admin._id || admin.role) {
       return new Error('Invalid admin object.');
     }
 
@@ -37,7 +36,7 @@ const generateTokenAdmin = (admin) => {
     }
 
     const token = jwt.sign(
-      { username: admin.username, id: admin._id },
+      { username: admin.username, id: admin._id, role: admin.role },
       JWT_SECRET_ADMIN,
       { expiresIn: '7d' },
     );
@@ -48,5 +47,3 @@ const generateTokenAdmin = (admin) => {
     throw error;
   }
 };
-
-module.exports = { generateTokenUser, generateTokenAdmin };
