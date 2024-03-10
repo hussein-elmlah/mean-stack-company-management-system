@@ -44,8 +44,28 @@ const projectSchema = new mongoose.Schema(
     projectPictures: [{ type: String }],
     description: { type: String },
   },
-  { timestamps: true },
+  { 
+    timestamps: true,
+    runValidators: true,
+  },
 );
+
+projectSchema.set('toJSON', {
+  transform(doc, ret) {
+    ret.id = ret._id;
+    delete ret._id;
+    delete ret.__v;
+  },
+});
+
+projectSchema.pre('findOneAndUpdate', async function preUpdate(next) {
+  try {
+    this.options.runValidators = true;
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+});
 
 const Project = mongoose.model('Project', projectSchema);
 

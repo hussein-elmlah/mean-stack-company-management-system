@@ -1,5 +1,5 @@
 interface User {
-  _id: string;
+  id: string;
   username: string;
   password: string;
   role: 'client' | 'junior' | 'senior' | 'branchManager' | 'companyOwner';

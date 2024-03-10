@@ -14,7 +14,7 @@ interface HoursExpectedPerDepartment {
 }
 
 interface Project {
-  _id: string;
+  id: string;
   name?: string;
   number?: number;
   location?: string;
