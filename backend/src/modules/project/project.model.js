@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const projectSchema = new mongoose.Schema(
   {
-    _id: { type: mongoose.Schema.Types.ObjectId, required: true },
+    // _id: { type: mongoose.Schema.Types.ObjectId, required: true },
     client: {
       user: {
         type: mongoose.Schema.Types.ObjectId,
