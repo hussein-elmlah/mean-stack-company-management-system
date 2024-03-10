@@ -39,56 +39,104 @@ export const login=asyncHandler(async(req,res)=>{
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    const passwordMatch = await compareFunction(password,user.password);
+    const passwordMatch = await compareFunction({plainText:password,hash:user.password});
 
     if (!passwordMatch) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     const token = generateTokenUser(user);
-
-    res.json({ token });
+    //console.log(token);
+    res.json({ user :token });
   }
 )
 
+export const paginateResults = (page, pageSize, users, usersCount) => {
+  const startIndex = (page - 1) * pageSize;
+  // eslint-disable-next-line radix
+  const endIndex = Math.min(parseInt(startIndex) + parseInt(pageSize), usersCount);
+  const paginatedData = users.slice(startIndex, endIndex);
+  return paginatedData;
+};
+
+export const getAllUsers = asyncHandler(async (req, res) => {
+  const { page = 1, pageSize = 1 } = req.query;
+
+  try {
+    const users = await User.find();
+    const usersCount = await User.countDocuments();
+    const paginatedUsers = paginateResults(page, pageSize, users, usersCount);
+
+    res.json({
+      users: paginatedUsers,
+      usersCount,
+      currentPage: parseInt(page),
+      totalPages: Math.ceil(usersCount / parseInt(pageSize))
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users', error: error.message });
+  }
+});
+
+export const getUserById = asyncHandler(async (req, res) => {
+  const id = req.params.id; 
+  const user = await User.findById(id);
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  res.json({ user });
+});
+
+export const getUserProfile = asyncHandler(async (req, res) => {
+  try {
+    //console.log(req.id);
+    const {id } = req.user.id;
+    const user = await User.findOne(id);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
+export const updateUserProfile = asyncHandler(async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const updatedFields = req.body;
 
-// export const getUserProfile = asyncHandler(async (req, res) => {
-//   try {
-//     const { userId } = req.user; // Extracted from the JWT
-//     const user = await User.findById(userId);
+    const user = await User.findByIdAndUpdate(userId, updatedFields, { new: true });
 
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
 
-//     res.json(user);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
-// export const updateUserProfile = asyncHandler(async (req, res) => {
-//   try {
-//     const { userId } = req.user; // Extracted from the JWT
-//     const updatedFields = req.body; // Assuming all fields are updatable
+export const deleteUser = asyncHandler(async (req, res) => {
+  try {
+    const { userId } = req.user;
 
-//     const user = await User.findByIdAndUpdate(userId, updatedFields, { new: true });
+    const user = await User.findByIdAndDelete(userId);
 
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
 
-//     res.json(user);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
-
-// export const logout = async (req, res) => {
-//   // You may implement additional logic for logout, such as invalidating tokens
-//   res.json({ message: 'Logout successful' });
-// };
+    res.json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
