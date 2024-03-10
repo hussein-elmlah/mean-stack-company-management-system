@@ -1,7 +1,5 @@
 [{
-  "_id": {
-    "$oid": "65b81ca00579b171776d0a9a"
-  },
+  "_id": "65b81ca00579b171776d0a9a",
   "username": "john_doe",
   "password": "hashed_password_1",
   "role": "senior",
@@ -18,9 +16,7 @@
   }
 },
 {
-  "_id": {
-    "$oid": "65b81ca00579b171776d0a9b"
-  },
+  "_id": "65b81ca00579b171776d0a9b",
   "username": "jane_smith",
   "password": "hashed_password_2",
   "role": "junior",
@@ -37,9 +33,7 @@
   }
 },
 {
-  "_id": {
-    "$oid": "65b81ca00579b171776d0a9c"
-  },
+  "_id": "65b81ca00579b171776d0a9c",
   "username": "client_a",
   "password": "hashed_password_3",
   "role": "client",
@@ -49,9 +43,7 @@
   "mobileNumber": "555-9876"
 },
 {
-  "_id": {
-    "$oid": "65b81d950579b171776d0aa5"
-  },
+  "_id": "65b81d950579b171776d0aa5",
   "username": "alice_architect",
   "password": "hashed_password_4",
   "role": "senior",
@@ -68,9 +60,7 @@
   }
 },
 {
-  "_id": {
-    "$oid": "65b81d950579b171776d0aa6"
-  },
+  "_id": "65b81d950579b171776d0aa6",
   "username": "bob_civil",
   "password": "hashed_password_5",
   "role": "junior",
@@ -87,9 +77,7 @@
   }
 },
 {
-  "_id": {
-    "$oid": "65b81d950579b171776d0aa7"
-  },
+  "_id": "65b81d950579b171776d0aa7",
   "username": "client_b",
   "password": "hashed_password_6",
   "role": "client",
@@ -99,9 +87,7 @@
   "mobileNumber": "555-9999"
 },
 {
-  "_id": {
-    "$oid": "65b81d950579b171776d0aa8"
-  },
+  "_id": "65b81d950579b171776d0aa8",
   "username": "branch_manager",
   "password": "hashed_password_7",
   "role": "branchManager",
@@ -117,9 +103,7 @@
   }
 },
 {
-  "_id": {
-    "$oid": "65b81d950579b171776d0aa9"
-  },
+  "_id": "65b81d950579b171776d0aa9",
   "username": "owner",
   "password": "hashed_password_8",
   "role": "companyOwner",

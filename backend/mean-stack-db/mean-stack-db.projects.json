@@ -1,7 +1,5 @@
 [{
-  "_id": {
-    "$oid": "65b84e2b0579b171776d0ae6"
-  },
+  "_id": "65b84e2b0579b171776d0ae6",
   "client": {
     "fullName": "Alice Williams",
     "mobileNumber": "111-222-3333"
@@ -42,9 +40,7 @@
   "description": "This is a residential project with two floors and an upper land annex. Expected to complete in 120 hours."
 },
 {
-  "_id": {
-    "$oid": "65b84e2b0579b171776d0ae7"
-  },
+  "_id": "65b84e2b0579b171776d0ae7",
   "client": {
     "fullName": "Eva Davis",
     "mobileNumber": "444-555-6666"
@@ -85,9 +81,7 @@
   "description": "This is a commercial project with four floors and an upper annex. Expected to complete in 180 hours."
 },
 {
-  "_id": {
-    "$oid": "65b84e2b0579b171776d0ae8"
-  },
+  "_id": "65b84e2b0579b171776d0ae8",
   "client": {
     "fullName": "Charlie Brown",
     "mobileNumber": "777-888-9999"
@@ -128,9 +122,7 @@
   "description": "This is a residential project with three floors and an upper land annex. Expected to complete in 140 hours."
 },
 {
-  "_id": {
-    "$oid": "65b84e2b0579b171776d0ae9"
-  },
+  "_id": "65b84e2b0579b171776d0ae9",
   "client": {
     "fullName": "Grace Turner",
     "mobileNumber": "123-987-4567"
@@ -171,9 +163,7 @@
   "description": "This is a commercial project with five floors. Expected to complete in 200 hours."
 },
 {
-  "_id": {
-    "$oid": "65b84e2b0579b171776d0aea"
-  },
+  "_id": "65b84e2b0579b171776d0aea",
   "client": {
     "fullName": "Oliver Martin",
     "mobileNumber": "890-123-4567"
@@ -212,4 +202,227 @@
     "https://source.unsplash.com/800x300/?bedroom"
   ],
   "description": "This is an industrial project with one floor and an upper annex. Expected to complete in 90 hours."
+},
+{
+  "_id": {
+    "$oid": "65ede057ca223f2b5440ed04"
+  },
+  "client": {
+    "fullName": "Alice Williams",
+    "mobileNumber": "111-222-3333"
+  },
+  "sender": {
+    "$oid": "60f81fe877905e15f08f6f48"
+  },
+  "participatingDepartments": [],
+  "hoursExpectedPerDepartment": {
+    "Construction": 80,
+    "Design": 40
+  },
+  "annex": {
+    "upper": true,
+    "land": true
+  },
+  "name": "project1 updated",
+  "number": 1,
+  "landArea": 700,
+  "dateOfSubmission": {
+    "$date": "2023-04-05T10:15:00.000Z"
+  },
+  "type": "Residential",
+  "numberOfFloors": 2,
+  "buildingArea": 350,
+  "totalBuildingArea": 700,
+  "hoursExpectedToComplete": 120,
+  "expectedCompletionDate": {
+    "$date": "2023-09-30T23:59:59.999Z"
+  },
+  "actualCompletionDate": null,
+  "downloadLink": "https://example.com/downloads/project4",
+  "projectPictures": [
+    "https://source.unsplash.com/800x300/?villa",
+    "https://source.unsplash.com/800x300/?kitchen",
+    "https://source.unsplash.com/800x300/?bedroom"
+  ],
+  "description": "This is a residential project with two floors and an upper land annex. Expected to complete in 120 hours.",
+  "createdAt": {
+    "$date": "2024-03-10T16:31:19.918Z"
+  },
+  "updatedAt": {
+    "$date": "2024-03-10T17:04:29.168Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ede8193cb2cba636e1d133"
+  },
+  "client": {
+    "fullName": "Alice Williams",
+    "mobileNumber": "111-222-3333"
+  },
+  "sender": {
+    "$oid": "60f81fe877905e15f08f6f48"
+  },
+  "participatingDepartments": [],
+  "hoursExpectedPerDepartment": {
+    "Construction": 80,
+    "Design": 40
+  },
+  "annex": {
+    "upper": true,
+    "land": true
+  },
+  "name": "project1",
+  "number": 1,
+  "landArea": 700,
+  "dateOfSubmission": {
+    "$date": "2023-04-05T10:15:00.000Z"
+  },
+  "type": "Residential",
+  "numberOfFloors": 2,
+  "buildingArea": 350,
+  "totalBuildingArea": 700,
+  "hoursExpectedToComplete": 120,
+  "expectedCompletionDate": {
+    "$date": "2023-09-30T23:59:59.999Z"
+  },
+  "actualCompletionDate": null,
+  "downloadLink": "https://example.com/downloads/project4",
+  "projectPictures": [
+    "https://source.unsplash.com/800x300/?villa",
+    "https://source.unsplash.com/800x300/?kitchen",
+    "https://source.unsplash.com/800x300/?bedroom"
+  ],
+  "description": "This is a residential project with two floors and an upper land annex. Expected to complete in 120 hours.",
+  "createdAt": {
+    "$date": "2024-03-10T17:04:25.835Z"
+  },
+  "updatedAt": {
+    "$date": "2024-03-10T17:04:25.835Z"
+  },
+  "__v": 0
+},
+{
+  "_id": "65b84e2b0579b171776d0aeb",
+  "client": {
+    "fullName": "Sophia Johnson",
+    "mobileNumber": "555-666-7777"
+  },
+  "owner": "Project Owner 9",
+  "sender": "60f81fe877905e15f08f6f4d",
+  "dateOfSubmission": "2023-09-20T12:00:00.000Z",
+  "type": "Residential",
+  "participatingDepartments": [
+    "Architecture",
+    "Interior Design"
+  ],
+  "numberOfFloors": 2,
+  "landArea": 800,
+  "buildingArea": 400,
+  "totalBuildingArea": 800,
+  "annex": {
+    "upper": false,
+    "land": false
+  },
+  "hoursExpectedToComplete": 100,
+  "expectedCompletionDate": "2023-12-31T23:59:59.999Z",
+  "actualCompletionDate": null,
+  "workingDepartments": [
+    "Construction",
+    "Design"
+  ],
+  "hoursExpectedPerDepartment": {
+    "Construction": 70,
+    "Design": 30
+  },
+  "downloadLink": "https://example.com/downloads/project9",
+  "projectPictures": [
+    "https://source.unsplash.com/800x300/?apartment",
+    "https://source.unsplash.com/800x300/?living-room",
+    "https://source.unsplash.com/800x300/?bedroom"
+  ],
+  "description": "This is a residential project with two floors. Expected to complete in 100 hours."
+},
+{
+  "_id": "65b84e2b0579b171776d0aec",
+  "client": {
+    "fullName": "Liam Miller",
+    "mobileNumber": "333-444-5555"
+  },
+  "owner": "Project Owner 10",
+  "sender": "60f81fe877905e15f08f6f4e",
+  "dateOfSubmission": "2023-10-10T15:30:00.000Z",
+  "type": "Commercial",
+  "participatingDepartments": [
+    "Architecture",
+    "Finance"
+  ],
+  "numberOfFloors": 6,
+  "landArea": 1800,
+  "buildingArea": 900,
+  "totalBuildingArea": 5400,
+  "annex": {
+    "upper": true,
+    "land": false
+  },
+  "hoursExpectedToComplete": 250,
+  "expectedCompletionDate": "2024-03-31T23:59:59.999Z",
+  "actualCompletionDate": null,
+  "workingDepartments": [
+    "Construction",
+    "Accounting"
+  ],
+  "hoursExpectedPerDepartment": {
+    "Construction": 180,
+    "Accounting": 70
+  },
+  "downloadLink": "https://example.com/downloads/project10",
+  "projectPictures": [
+    "https://source.unsplash.com/800x300/?skyscraper",
+    "https://source.unsplash.com/800x300/?office-building",
+    "https://source.unsplash.com/800x300/?business-center"
+  ],
+  "description": "This is a commercial project with six floors and an upper annex. Expected to complete in 250 hours."
+},
+{
+  "_id": "65b84e2b0579b171776d0aed",
+  "client": {
+    "fullName": "Isabella Brown",
+    "mobileNumber": "777-888-9999"
+  },
+  "owner": "Project Owner 11",
+  "sender": "60f81fe877905e15f08f6f4f",
+  "dateOfSubmission": "2023-11-05T08:00:00.000Z",
+  "type": "Residential",
+  "participatingDepartments": [
+    "Engineering",
+    "Customer Service"
+  ],
+  "numberOfFloors": 4,
+  "landArea": 1200,
+  "buildingArea": 600,
+  "totalBuildingArea": 2400,
+  "annex": {
+    "upper": false,
+    "land": true
+  },
+  "hoursExpectedToComplete": 200,
+  "expectedCompletionDate": "2024-04-30T23:59:59.999Z",
+  "actualCompletionDate": null,
+  "workingDepartments": [
+    "Construction",
+    "Support"
+  ],
+  "hoursExpectedPerDepartment": {
+    "Construction": 150,
+    "Support": 50
+  },
+  "downloadLink": "https://example.com/downloads/project11",
+  "projectPictures": [
+    "https://source.unsplash.com/800x300/?modern-house",
+    "https://source.unsplash.com/800x300/?architecture",
+    "https://source.unsplash.com/800x300/?building"
+  ],
+  "description": "This is a residential project with four floors and a land annex. Expected to complete in 200 hours."
 }]

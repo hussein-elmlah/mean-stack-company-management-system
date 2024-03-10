@@ -1,9 +1,13 @@
-.container {
-  width: 50%;
-  box-shadow: 5px 5px 10px 10px rgb(226, 226, 226);
+.signup {
   padding: 20px;
   width: 50%;
   margin: 30px auto;
+  box-shadow: 5px 5px 10px 10px rgb(226, 226, 226);
+}
+@media (max-width: 767px) {
+  .signup {
+    width: 90%;
+  }
 }
 label,
 p,
