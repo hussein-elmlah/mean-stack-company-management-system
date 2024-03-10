@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 const connectDB = async () => {
   try {
     // Attempt to connect to MongoDB
-    await mongoose.connect('mongodb://localhost/mean-stack-db');
+    await mongoose.connect('mongodb+srv://nourantareqmohamed:HHvw8soG2oa2mok7@nouranscluster0.4zfzjbg.mongodb.net/company');
     console.log('Connected to MongoDB');
   } catch (error) {
     // If an error occurs during connection, log the error message

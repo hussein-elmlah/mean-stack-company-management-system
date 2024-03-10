@@ -6,6 +6,7 @@ import { ContactComponent } from './home/contact/contact.component';
 import { PortfolioComponent } from './home/portfolio/portfolio.component';
 import { ServicesComponent } from './home/services/services.component';
 import { AboutComponent } from './home/about/about.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 export const routes: Routes = [
     {
@@ -42,5 +43,10 @@ export const routes: Routes = [
         path:'signup',
         component:SignupComponent,
         title:"signup page"
+    },
+    {
+        path:'test', // this route should be deleted in production.
+        component:ProjectListComponent,
+        title:"test page"
     }
 ];

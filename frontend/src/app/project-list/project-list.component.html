@@ -1,0 +1,29 @@
+<div class="project-list container m-auto ">
+    <div *ngFor="let project of projects; let i = index">
+      <!-- Display project information here -->
+      <h5 class="card-title">اسم المشروع: {{ project.name }}</h5>
+      <p class="card-text">الوصف: {{ project.description }}</p>
+
+      <!-- Carousel for project pictures -->
+      <div [id]="'carousel' + project.id + i" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div *ngFor="let picture of project.projectPictures; let j = index" class="carousel-item" [class.active]="j === 0">
+            <img [src]="picture" class="d-block w-100" alt="Project Picture">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel' + project.id + i" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel' + project.id + i" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <!-- Add more fields as needed -->
+    </div>
+
+    <!-- Pagination -->
+    <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChange)="onPageChange($event)"></app-pagination>
+  </div>
