@@ -35,10 +35,8 @@ export class UserService {
   createUser(userData: any): Observable<any> {
     return this.apiService.post('users/register', userData).pipe(
       catchError((error) => {
-        console.error('Error occurred while creating user:', error);
-        return throwError(
-          () => new Error('Failed to create user. Please try again later.')
-        );
+        // console.error('Error occurred while creating user:', error);
+        return throwError(() => error);
       })
     );
   }

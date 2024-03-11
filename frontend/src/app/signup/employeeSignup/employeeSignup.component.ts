@@ -43,7 +43,7 @@ export class EmployeeSignupComponent {
         }, 1000);
       },
       (error) => {
-        console.error('Login error:', error);
+        console.error('Signup error:', error);
       }
     );
   }

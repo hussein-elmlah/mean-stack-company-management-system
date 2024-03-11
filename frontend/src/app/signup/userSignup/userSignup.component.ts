@@ -45,7 +45,10 @@ export class UserSignupComponent {
         }, 1000);
       },
       (error) => {
-        console.error('Login error:', error);
+        if (error.error && error.error.message) {
+          console.log('Error message:', error.error.message);
+        }
+        console.error('Signup error:', error.error.message);
       }
     );
   }
