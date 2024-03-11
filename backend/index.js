@@ -20,7 +20,7 @@ const app = express();
 
 
 //! set security http headers
-app.use(helmet())
+// app.use(helmet())
 
 const uploadImageFolder = path.join(__dirname, 'uploads', 'images');
 if (!fs.existsSync(uploadImageFolder)) {
