@@ -2,9 +2,8 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from './user.model.js';
 import asyncHandler from '../../../lib/asyncHandler.js';
-import {hashFunction,compareFunction} from '../../../lib/hashAndCompare.js'
+import { hashFunction, compareFunction } from '../../../lib/hashAndCompare.js';
 import { generateTokenUser } from '../../../utils/jwtUtils.js';
-
 
 // eslint-disable-next-line import/prefer-default-export
 export const register = asyncHandler(async (req, res) => {
@@ -31,25 +30,24 @@ export const register = asyncHandler(async (req, res) => {
   }
 });
 
-export const login=asyncHandler(async(req,res)=>{
+export const login = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-    const user = await User.findOne({ username });
+  const user = await User.findOne({ username });
 
-    if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials' });
-    }
-
-    const passwordMatch = await compareFunction({plainText:password,hash:user.password});
-
-    if (!passwordMatch) {
-      return res.status(401).json({ error: 'Invalid credentials' });
-    }
-
-    const token = generateTokenUser(user);
-    //console.log(token);
-    res.json({ user :token });
+  if (!user) {
+    return res.status(401).json({ error: 'Invalid credentials' });
   }
-)
+
+  const passwordMatch = await compareFunction({ plainText: password, hash: user.password });
+
+  if (!passwordMatch) {
+    return res.status(401).json({ error: 'Invalid credentials' });
+  }
+
+  const token = generateTokenUser(user);
+  // console.log(token);
+  res.json({ user: token });
+});
 
 export const paginateResults = (page, pageSize, users, usersCount) => {
   const startIndex = (page - 1) * pageSize;
@@ -71,7 +69,7 @@ export const getAllUsers = asyncHandler(async (req, res) => {
       users: paginatedUsers,
       usersCount,
       currentPage: parseInt(page),
-      totalPages: Math.ceil(usersCount / parseInt(pageSize))
+      totalPages: Math.ceil(usersCount / parseInt(pageSize)),
     });
   } catch (error) {
     res.status(500).json({ message: 'Error fetching users', error: error.message });
@@ -79,7 +77,7 @@ export const getAllUsers = asyncHandler(async (req, res) => {
 });
 
 export const getUserById = asyncHandler(async (req, res) => {
-  const id = req.params.id; 
+  const { id } = req.params;
   const user = await User.findById(id);
 
   if (!user) {
@@ -91,9 +89,9 @@ export const getUserById = asyncHandler(async (req, res) => {
 
 export const getUserProfile = asyncHandler(async (req, res) => {
   try {
-    //console.log(req.id);
-    const {id } = req.user.id;
-    const user = await User.findOne(id);
+    console.log(req.user.id);
+    const userId = req.user.id;
+    const user = await User.findOne({ _id: userId });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -105,13 +103,12 @@ export const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-
 export const updateUserProfile = asyncHandler(async (req, res) => {
   try {
-    const { userId } = req.user;
+    const { userId } = req.user.id;
     const updatedFields = req.body;
 
-    const user = await User.findByIdAndUpdate(userId, updatedFields, { new: true });
+    const user = await User.findOneAndUpdate(userId, updatedFields, { new: true });
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -126,9 +123,9 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
 
 export const deleteUser = asyncHandler(async (req, res) => {
   try {
-    const { userId } = req.user;
+    const { userId } = req.user.id;
 
-    const user = await User.findByIdAndDelete(userId);
+    const user = await User.findOneAndDelete(userId);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });

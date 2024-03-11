@@ -4,7 +4,7 @@ import User from '../src/modules/user/user.model.js';
 
 export const isAuth = asyncHandler(async (req, res, next) => {
   try {
-    const token = req.header('authorization');
+    const token = req.header('token');
     if (!token) {
       return res.status(403).json('Your are not authenticated please login');
     }
