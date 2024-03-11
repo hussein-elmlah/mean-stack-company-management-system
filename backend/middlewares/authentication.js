@@ -1,18 +1,19 @@
+/* eslint-disable import/prefer-default-export */
 import jwt from 'jsonwebtoken';
 import asyncHandler from '../lib/asyncHandler.js';
+import User from '../src/modules/user/user.model.js';
+import CustomError from '../lib/customError.js';
 
 export const isAuth = asyncHandler(async (req, res, next) => {
-  try {
-    const token = req.header('token');
-    if (!token) {
-      return res.status(403).json('Your are not authenticated please login');
-    }
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-    if (verified) {
-      req.user = verified.user;
-      next();
-    }
-  } catch (error) {
-    res.status(403).json('Your are not authenticated please login');
+  const token = req.header('token');
+  if (!token) {
+    throw new CustomError('You are not authenticated, please login', 403);
   }
+  const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+  const user = await User.findById(decodedToken.id).exec();
+  if (!user) {
+    throw new CustomError('User not found', 404);
+  }
+  req.user = user;
+  next();
 });
