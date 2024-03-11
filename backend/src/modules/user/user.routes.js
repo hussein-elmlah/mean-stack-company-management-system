@@ -1,21 +1,21 @@
 import express from 'express';
 import * as userController from './user.controllers.js';
+import { isAuth } from '../../../middlewares/authentication.js';
 
 const router = express.Router();
 
-// POST register a new user
 router.post('/register', userController.register);
 
-// POST login an existing user
 router.post('/login', userController.login);
 
-// // GET user profile (protected route)
-// router.get('/profile', getUserProfile);
+router.get('/allUsers', userController.getAllUsers);
 
-// // PUT update user profile (protected route)
-// router.put('/profile', updateUserProfile);
+router.get('/:id', userController.getUserById);
 
-// // POST logout user (protected route)
-// router.post('/logout', logout); */
+router.get('/', isAuth, userController.getUserProfile);
+
+router.put('/profile', isAuth, userController.updateUserProfile);
+
+router.delete('/profile', isAuth, userController.deleteUser);
 
 export default router;

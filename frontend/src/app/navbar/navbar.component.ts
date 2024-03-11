@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, NgbDropdownModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-  constructor(private router: Router){};
+  constructor(private router: Router) {}
 
-  viewLogin(){
+  viewLogin() {
     this.router.navigate(['/login']);
   }
 
-  viewSignup(){
+  viewSignup() {
     this.router.navigate(['/signup']);
   }
-
 }

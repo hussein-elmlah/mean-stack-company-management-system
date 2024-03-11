@@ -3,29 +3,24 @@ import asyncHandler from '../../../lib/asyncHandler.js';
 import { hashFunction, compareFunction } from '../../../lib/hashAndCompare.js';
 import { generateTokenUser } from '../../../utils/jwtUtils.js';
 
-// eslint-disable-next-line import/prefer-default-export
 export const register = asyncHandler(async (req, res) => {
   const {
     username, password, firstName, email, lastName, dateOfBirth, address, jobLevel, mobileNumber, contract,
   } = req.body;
   const hashedPassword = await hashFunction({ plainText: password });
-  try {
-    const newUser = await User.create({
-      username,
-      password: hashedPassword,
-      firstName,
-      email,
-      lastName,
-      dateOfBirth,
-      address,
-      jobLevel,
-      mobileNumber,
-      contract,
-    });
-    res.status(201).json({ message: 'User registered successfully', newUser });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+  const newUser = await User.create({
+    username,
+    password: hashedPassword,
+    firstName,
+    email,
+    lastName,
+    dateOfBirth,
+    address,
+    jobLevel,
+    mobileNumber,
+    contract,
+  });
+  res.status(201).json({ message: 'User registered successfully', newUser });
 });
 
 export const login = asyncHandler(async (req, res) => {
@@ -35,17 +30,20 @@ export const login = asyncHandler(async (req, res) => {
   if (!user) {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
+
   const passwordMatch = await compareFunction(password, user.password);
 
   if (!passwordMatch) {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
-  const token = await generateTokenUser(user);
-  // //! send token in cookies
+
+  const token = generateTokenUser(user);
   res.cookie('jwt', token, {
-    expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
-    secure: true,
+    expires: new Date(
+      Date.now() + 2 * 24 * 60 * 60 * 1000,
+    ),
     httpOnly: true,
+    secure: req.secure,
   });
   res.json({ token });
 });
