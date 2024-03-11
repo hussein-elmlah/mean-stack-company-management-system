@@ -1,23 +1,20 @@
 import jwt from 'jsonwebtoken';
 
-const { JWT_SECRET, JWT_SECRET_ADMIN } = process.env;
-
-export const generateTokenUser = (user) => {
+export const generateTokenUser = async (user) => {
   try {
-    if (!user || !user.username || !user._id || user.role) {
+    if (!user || !user.username || !user._id || !user.role) {
       return new Error('Invalid user object.');
     }
-
+    const { JWT_SECRET } = process.env;
     if (!JWT_SECRET) {
       return new Error('JWT secret is not defined.');
     }
 
-    const token = jwt.sign(
+    const token = await jwt.sign(
       { username: user.username, id: user._id, role: user.role },
       JWT_SECRET,
       { expiresIn: '7d' },
     );
-
     return token;
   } catch (error) {
     console.error('Error generating JWT token:', error.message);
@@ -30,6 +27,7 @@ export const generateTokenAdmin = (admin) => {
     if (!admin || !admin.username || !admin._id || admin.role) {
       return new Error('Invalid admin object.');
     }
+    const { JWT_SECRET_ADMIN } = process.env;
 
     if (!JWT_SECRET_ADMIN) {
       return new Error('JWT admin secret is not defined.');

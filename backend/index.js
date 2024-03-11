@@ -18,12 +18,16 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
+
+//! set security http headers
+app.use(helmet())
+
 const uploadImageFolder = path.join(__dirname, 'uploads', 'images');
 if (!fs.existsSync(uploadImageFolder)) {
   fs.mkdirSync(uploadImageFolder, { recursive: true });
 }
 
-const uploadFileFolder = path.join(__dirname, 'uploads', 'files');
+const uploadFileFolder = path.join( __dirname, 'uploads', 'files');
 if (!fs.existsSync(uploadFileFolder)) {
   fs.mkdirSync(uploadFileFolder, { recursive: true });
 }
@@ -33,7 +37,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-app.use(helmet());
 app.use(express.json());
 
 app.use(cors({

@@ -1,10 +1,7 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import User from './user.model.js';
 import asyncHandler from '../../../lib/asyncHandler.js';
-import {hashFunction,compareFunction} from '../../../lib/hashAndCompare.js'
+import { hashFunction, compareFunction } from '../../../lib/hashAndCompare.js';
 import { generateTokenUser } from '../../../utils/jwtUtils.js';
-
 
 // eslint-disable-next-line import/prefer-default-export
 export const register = asyncHandler(async (req, res) => {
@@ -31,28 +28,27 @@ export const register = asyncHandler(async (req, res) => {
   }
 });
 
-export const login=asyncHandler(async(req,res)=>{
+export const login = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-    const user = await User.findOne({ username });
+  const user = await User.findOne({ username });
 
-    if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials' });
-    }
-
-    const passwordMatch = await compareFunction(password,user.password);
-
-    if (!passwordMatch) {
-      return res.status(401).json({ error: 'Invalid credentials' });
-    }
-
-    const token = generateTokenUser(user);
-
-    res.json({ token });
+  if (!user) {
+    return res.status(401).json({ error: 'Invalid credentials' });
   }
-)
+  const passwordMatch = await compareFunction(password, user.password);
 
-
-
+  if (!passwordMatch) {
+    return res.status(401).json({ error: 'Invalid credentials' });
+  }
+  const token = await generateTokenUser(user);
+  // //! send token in cookies
+  res.cookie('jwt', token, {
+    expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+    secure: true,
+    httpOnly: true,
+  });
+  res.json({ token });
+});
 
 // export const getUserProfile = asyncHandler(async (req, res) => {
 //   try {
