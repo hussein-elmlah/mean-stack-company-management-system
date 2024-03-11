@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import validator from 'validator';
 
 const userSchema = new mongoose.Schema({
-  // _id: { type: mongoose.Schema.Types.ObjectId, required: true },
   username: {
     type: String,
     unique: true,

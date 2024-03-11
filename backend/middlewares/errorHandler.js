@@ -34,6 +34,7 @@ const sendErrorProd = (err, res) => {
     // Programming or other unknown error: don't leak error details
   } else {
     // 1) Log error
+    // eslint-disable-next-line no-console
     console.error('ERROR 💥', err);
     // 2) Send generic message
     res.status(500).json({

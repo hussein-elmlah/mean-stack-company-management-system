@@ -1,7 +1,9 @@
+/* eslint-disable radix */
 import User from './user.model.js';
 import asyncHandler from '../../../lib/asyncHandler.js';
 import { hashFunction, compareFunction } from '../../../lib/hashAndCompare.js';
 import { generateTokenUser } from '../../../utils/jwtUtils.js';
+import CustomError from '../../../lib/customError.js';
 
 export const register = asyncHandler(async (req, res) => {
   const {
@@ -26,63 +28,82 @@ export const register = asyncHandler(async (req, res) => {
 export const login = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
-
   if (!user) {
-    return res.status(401).json({ error: 'Invalid credentials' });
+    throw new CustomError('Invalid credentials', 401);
   }
-
-  const passwordMatch = await compareFunction(password, user.password);
-
+  const passwordMatch = await compareFunction({ plainText: password, hash: user.password });
   if (!passwordMatch) {
-    return res.status(401).json({ error: 'Invalid credentials' });
+    throw new CustomError('Invalid credentials', 401);
   }
-
   const token = generateTokenUser(user);
   res.cookie('jwt', token, {
     expires: new Date(
       Date.now() + 2 * 24 * 60 * 60 * 1000,
     ),
     httpOnly: true,
-    secure: req.secure,
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
   });
-  res.json({ token });
+  res.json({ user: token });
 });
 
-// export const getUserProfile = asyncHandler(async (req, res) => {
-//   try {
-//     const { userId } = req.user; // Extracted from the JWT
-//     const user = await User.findById(userId);
+export const paginateResults = (page, pageSize, users, usersCount) => {
+  const startIndex = (page - 1) * pageSize;
+  // eslint-disable-next-line radix
+  const endIndex = Math.min(parseInt(startIndex) + parseInt(pageSize), usersCount);
+  const paginatedData = users.slice(startIndex, endIndex);
+  return paginatedData;
+};
 
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
+export const getAllUsers = asyncHandler(async (req, res) => {
+  const { page = 1, pageSize = 2 } = req.query;
+  const users = await User.find();
+  const usersCount = await User.countDocuments();
+  const paginatedUsers = await paginateResults(page, pageSize, users, usersCount);
+  console.log(paginatedUsers);
+  res.json({
+    users: paginatedUsers,
+    usersCount,
 
-//     res.json(user);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
+    // eslint-disable-next-line radix
+    currentPage: parseInt(page),
+    totalPages: Math.ceil(usersCount / parseInt(pageSize)),
+  });
+});
 
-// export const updateUserProfile = asyncHandler(async (req, res) => {
-//   try {
-//     const { userId } = req.user; // Extracted from the JWT
-//     const updatedFields = req.body; // Assuming all fields are updatable
+export const getUserById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    throw new CustomError('User not found', 404);
+  }
 
-//     const user = await User.findByIdAndUpdate(userId, updatedFields, { new: true });
+  res.json({ user });
+});
 
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
+export const getUserProfile = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  const user = await User.findOne({ _id: userId });
+  if (!user) {
+    throw new CustomError('User not found', 404);
+  }
+  res.json(user);
+});
 
-//     res.json(user);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
+export const updateUserProfile = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  const updatedFields = req.body;
+  const user = await User.findByIdAndUpdate({ _id: userId }, updatedFields, { new: true });
+  if (!user) {
+    throw new CustomError('User not found', 404);
+  }
+  res.json(user);
+});
 
-// export const logout = async (req, res) => {
-//   // You may implement additional logic for logout, such as invalidating tokens
-//   res.json({ message: 'Logout successful' });
-// };
+export const deleteUser = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  const user = await User.findByIdAndDelete({ _id: userId });
+  if (!user) {
+    throw new CustomError('User not found', 404);
+  }
+  res.json({ message: 'User deleted successfully' });
+});
