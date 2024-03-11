@@ -1,0 +1,131 @@
+<div>
+  <div class="container rounded-2">
+    <form [formGroup]="signUpForm" (ngSubmit)="handleFormSubmit()">
+      <!-- First Name -->
+      <div class="mb-2">
+        <label for="firstNameInput" class="form-label">الاسم الاول</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstNameInput"
+          formControlName="firstName"
+          placeholder="ادخل الاسم الاول"
+        />
+
+        @if(signUpForm.controls['firstName'].invalid &&
+        signUpForm.controls['firstName'].touched){
+        <div class="form-text text-danger">
+          @if(signUpForm.controls['firstName'].errors?.['required']){
+          <small>يجب ادخال الاسم الاول</small>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label for="lastNameInput" class="form-label">الاسم الاخير</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastNameInput"
+          formControlName="lastName"
+          placeholder="ادخل الاسم الاخير"
+        />
+
+        @if(signUpForm.controls['lastName'].invalid &&
+        signUpForm.controls['lastName'].touched){
+        <div class="form-text text-danger">
+          @if(signUpForm.controls['lastName'].errors?.['required']){
+          <small>يجب ادخال الاسم الاخير</small>
+          }
+        </div>
+        }
+      </div>
+
+
+
+      <div class="mb-2">
+        <label for="userNameInput" class="form-label">اسم المستخدم</label>
+        <input
+          type="text"
+          class="form-control"
+          id="userNameInput"
+          formControlName="userName"
+          placeholder="ادخل اسم المستخدم"
+        />
+
+        @if(signUpForm.controls['userName'].invalid &&
+        signUpForm.controls['userName'].touched){
+        <div class="form-text text-danger">
+          @if(signUpForm.controls['userName'].errors?.['required']){
+          <small>يجب ادخال اسم المستخدم</small>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label for="emailInput" class="form-label">البريد الالكتروني</label>
+        <input
+          type="text"
+          class="form-control"
+          id="emailInput"
+          formControlName="email"
+          placeholder="ادخل البريد الالكتروني"
+        />
+
+        @if(signUpForm.controls['email'].invalid &&
+        signUpForm.controls['email'].touched){
+        <div class="form-text text-danger">
+          @if(signUpForm.controls['email'].errors?.['required']){
+          <small>يجب ادخال البريد الالكتروني</small>
+          } @if(signUpForm.controls['email'].errors?.["email"]){
+          <div class="form-text text-danger">يجب ادخال البريد الالكتروني بشكل صحيح</div>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label for="passwordInput" class="form-label">كلمة السر</label>
+        <input
+          type="password"
+          class="form-control"
+          id="passwordInput"
+          formControlName="password"
+          placeholder="ادخل كلمة السر"
+        />
+
+        @if(signUpForm.controls['password'].invalid &&
+        signUpForm.controls['password'].touched){
+        <div class="form-text text-danger">
+          @if(signUpForm.controls['password'].errors?.['required']){
+          <small>يجب ادخال كلمة السر</small>
+          }@else if(signUpForm.controls['password'].errors?.["minlength"]){
+          <div class="form-text text-danger">
+            يجب ادخال على الاقل 8 حروف لكلمة السر
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      <button
+        class="mb-2 mt-2 rounded-2"
+        [disabled]="
+          !(
+            signUpForm.controls['firstName'].valid &&
+            signUpForm.controls['lastName'].valid &&
+            signUpForm.controls['email'].valid &&
+            signUpForm.controls['password'].valid
+          )
+        "
+      >
+        انشئ حساب
+      </button>
+    </form>
+  </div>
+  <div class="text-center">
+    <p>هل لديك حساب بالفعل ؟ <a routerLink="/login">تسجيل دخول</a></p>
+  </div>
+</div>

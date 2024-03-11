@@ -1,24 +1,28 @@
-.navbarstyle{
-    background-color: rgb(230, 229, 229);
-    color: white;
-    box-shadow: -9px -12px 40px 5px gray;
+.navbarstyle {
+  background-color: rgb(230, 229, 229);
+  color: white;
+  box-shadow: -9px -12px 40px 5px gray;
 }
-a{
-    color: black;
+a {
+  color: black;
 }
-.d-flex button{
-    margin-right: 20px;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: rgb(230, 139, 3);
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    transition: all 0.5s ease-in-out;
-    border: 0px;
+.d-flex button {
+  margin-right: 20px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: rgb(230, 139, 3);
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  transition: all 0.5s ease-in-out;
+  border: 0px;
 }
-.d-flex button:hover{
-    color: rgb(230, 139, 3);
-    background-color: white;
-    cursor: pointer;
+.d-flex button:hover {
+  color: rgb(230, 139, 3);
+  background-color: white;
+  cursor: pointer;
+}
+a:hover {
+  color: rgb(230, 139, 3);
+  font-weight: bold;
 }
