@@ -42,22 +42,20 @@
         }
       </div>
 
-
-
       <div class="mb-2">
-        <label for="userNameInput" class="form-label">اسم المستخدم</label>
+        <label for="usernameInput" class="form-label">اسم المستخدم</label>
         <input
           type="text"
           class="form-control"
-          id="userNameInput"
-          formControlName="userName"
+          id="usernameInput"
+          formControlName="username"
           placeholder="ادخل اسم المستخدم"
         />
 
-        @if(signUpForm.controls['userName'].invalid &&
-        signUpForm.controls['userName'].touched){
+        @if(signUpForm.controls['username'].invalid &&
+        signUpForm.controls['username'].touched){
         <div class="form-text text-danger">
-          @if(signUpForm.controls['userName'].errors?.['required']){
+          @if(signUpForm.controls['username'].errors?.['required']){
           <small>يجب ادخال اسم المستخدم</small>
           }
         </div>
@@ -80,7 +78,9 @@
           @if(signUpForm.controls['email'].errors?.['required']){
           <small>يجب ادخال البريد الالكتروني</small>
           } @if(signUpForm.controls['email'].errors?.["email"]){
-          <div class="form-text text-danger">يجب ادخال البريد الالكتروني بشكل صحيح</div>
+          <div class="form-text text-danger">
+            يجب ادخال البريد الالكتروني بشكل صحيح
+          </div>
           }
         </div>
         }

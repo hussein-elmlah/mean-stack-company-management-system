@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@angular/localize": "^17.2.4"
+  }
+}

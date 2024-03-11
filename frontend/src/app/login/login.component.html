@@ -1,21 +1,19 @@
 <div>
   <div class="loginpage rounded-2">
     <form [formGroup]="loginForm" (ngSubmit)="handleloginform()">
-      <label for="email" class="mb-2">البريد الالكتروني</label>
+      <label for="username" class="mb-2"> اسم المستخدم</label>
       <input
         type="text"
         class="form-control mb-2"
-        placeholder="ادخل البريد الالكتروني"
-        formControlName="email"
+        placeholder="ادخل اسم المستخدم"
+        formControlName="username"
       />
-      @if(loginForm.controls['email'].invalid &&
-      (loginForm.controls['email'].touched ||
-      loginForm.controls['email'].dirty)){
-      @if(loginForm.controls['email'].errors?.["required"]){
-      <div class="alert alert-danger">يجب ادخال البريد الالكتروني</div>
-      } @if(loginForm.controls['email'].errors?.["email"]){
-      <div class="alert alert-danger">يجب ادخال البريد الالكتروني بشكل صحيح</div>
-      } }
+      @if(loginForm.controls['username'].invalid &&
+      (loginForm.controls['username'].touched ||
+      loginForm.controls['username'].dirty)){
+      @if(loginForm.controls['username'].errors?.["required"]){
+      <div class="alert alert-danger">يجب ادخال اسم المستخدم</div>
+      }}
       <label for="password" class="mb-2">كلمة السر</label>
       <input
         type="password"
@@ -37,7 +35,7 @@
         class="mb-2 mt-2 rounded-2"
         [disabled]="
           !(
-            loginForm.controls['email'].valid &&
+            loginForm.controls['username'].valid &&
             loginForm.controls['password'].valid
           )
         "
@@ -47,6 +45,6 @@
     </form>
   </div>
   <div class="text-center">
-    <p>ليس لديك حساب ؟  <a routerLink="/signup">انشئ حساب</a></p>
+    <p>ليس لديك حساب ؟ <a routerLink="/signup">انشئ حساب</a></p>
   </div>
 </div>

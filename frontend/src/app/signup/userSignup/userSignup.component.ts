@@ -8,6 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { UserService } from '../../../services/user.service';
+import User from '../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-user-signup',
@@ -18,11 +20,12 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class UserSignupComponent {
   signUpForm!: FormGroup;
-  constructor(private router: Router) {
+  newUser!: User;
+  constructor(private router: Router, private userServices: UserService) {
     this.signUpForm = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
-      userName: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
@@ -32,8 +35,18 @@ export class UserSignupComponent {
   }
 
   handleFormSubmit() {
-    console.log(this.signUpForm);
     console.log(this.signUpForm.value);
-    this.router.navigate(['/']);
+    this.userServices.createUser(this.signUpForm.value).subscribe(
+      (response) => {
+        console.log('Login successful:', response);
+        alert('congratulation,you signed up successfully.');
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 1000);
+      },
+      (error) => {
+        console.error('Login error:', error);
+      }
+    );
   }
 }
