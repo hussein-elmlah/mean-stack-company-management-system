@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import validator from 'validator';
 
 export const departmentSchema = new mongoose.Schema({
   name: {
@@ -7,12 +6,12 @@ export const departmentSchema = new mongoose.Schema({
     required: true,
     validate: {
       async validator(value) {
-        const existingDept = await this.constructor.findOne({
+        const existingDept = await mongoose.models.Department.findOne({
           name: value,
         });
         return !existingDept;
       },
-      message: "Please choose another department name  🤨",
+      message: 'Please choose another department name 🤨',
     },
   },
 });
