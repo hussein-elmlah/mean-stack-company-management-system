@@ -32,7 +32,8 @@ const projectSchema = new mongoose.Schema(
     landPerimeter: { type: Number },
     landArea: { type: Number },
     dateOfSubmission: { type: Date },
-    type: { type: String, enum: ['autocad', 'revit'] }, // Enum accepting 'autocad' or 'revit'
+    program: { type: String, enum: ['autocad', 'revit'] }, // Renamed from 'type', with enum values 'autocad' or 'revit'
+    type: { type: String, enum: ['villa', 'residential', 'administrative', 'commercial', 'other'] }, // Enum values for 'type'
     numberOfFloors: { type: Number },
     buildingArea: { type: Number },
     totalBuildingArea: { type: Number },
