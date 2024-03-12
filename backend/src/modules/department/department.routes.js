@@ -1,6 +1,6 @@
 // routes/departments.js
 import express from 'express';
-import * as departmentController from './departmentController.js';
+import * as departmentController from './department.controllers.js';
 
 const router = express.Router();
 
