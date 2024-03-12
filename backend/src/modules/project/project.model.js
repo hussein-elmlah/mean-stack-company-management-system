@@ -28,6 +28,7 @@ const projectSchema = new mongoose.Schema(
     name: { type: String, required: true },
     number: { type: Number, required: true },
     priority: { type: Number },
+    projectStatus: { type: String, enum: ['tracked', 'untracked', 'deleted'] },
     location: { type: String },
     planNumber: { type: String },
     plotNumber: { type: String },
