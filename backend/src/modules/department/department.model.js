@@ -5,7 +5,7 @@ export const departmentSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    set: function(value) {
+    set(value) {
       return value.toLowerCase();
     },
     validate: {
@@ -15,9 +15,10 @@ export const departmentSchema = new mongoose.Schema({
         });
         return !existingDept;
       },
-      message: "Please choose another department name  🤨",
+      message: 'Please choose another department name  🤨',
     },
   },
+
 });
 const Department = mongoose.model('Department', departmentSchema);
 export default Department;
