@@ -22,7 +22,8 @@ interface Project {
   owner?: string;
   sender?: string;
   dateOfSubmission?: Date;
-  type?: string;
+  program?: 'autocad' | 'revit'; // Updated property name
+  type?: 'villa' | 'residential' | 'administrative' | 'commercial' | 'other'; // Updated enum values
   participatingDepartments?: string[];
   numberOfFloors?: number;
   landArea?: number;
@@ -34,7 +35,8 @@ interface Project {
   actualCompletionDate: Date | null;
   workingDepartments?: string[];
   hoursExpectedPerDepartment?: HoursExpectedPerDepartment;
-  downloadLink?: string;
+  fileLinkOriginal?: string; // Updated field name
+  fileLinkFinal?: string; // New field
   projectPictures?: string[];
   description?: string;
   createdAt?: Date;
