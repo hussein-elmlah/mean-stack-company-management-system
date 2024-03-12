@@ -1,6 +1,6 @@
-// controllers/departmentController.js
-import Department from '../models/Department.js';
+import Department from './department.model.js';
 import asyncHandler from '../../../lib/asyncHandler.js';
+import CustomError from '../../../lib/customError.js';
 
 export const getAllDepartments = asyncHandler(async (req, res) => {
   // Pagination parameters
@@ -37,63 +37,42 @@ export const getAllDepartments = asyncHandler(async (req, res) => {
 });
 
 export const getDepartmentById = asyncHandler(async (req, res) => {
-  try {
-    const { departmentId } = req.params;
-    const department = await Department.findById(departmentId);
+  const { departmentId } = req.params;
+  const department = await Department.findById(departmentId);
 
-    if (!department) {
-      return res.status(404).json({ error: 'Department not found' });
-    }
-
-    res.json(department);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+  if (!department) {
+    throw new CustomError('Department not found', 404);
   }
+
+  res.json(department);
 });
 
 export const createDepartment = asyncHandler(async (req, res) => {
-  try {
-    const departmentData = req.body;
-    const newDepartment = await Department.create(departmentData);
-    res.status(201).json(newDepartment);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+  const departmentData = req.body;
+  const newDepartment = await Department.create(departmentData);
+  res.status(201).json(newDepartment);
 });
 
 export const updateDepartment = asyncHandler(async (req, res) => {
-  try {
-    const { departmentId } = req.params;
-    const updatedFields = req.body;
+  const { departmentId } = req.params;
+  const updatedFields = req.body;
 
-    const updatedDepartment = await Department.findByIdAndUpdate(departmentId, updatedFields, { new: true });
+  const updatedDepartment = await Department.findByIdAndUpdate(departmentId, updatedFields, { new: true });
 
-    if (!updatedDepartment) {
-      return res.status(404).json({ error: 'Department not found' });
-    }
-
-    res.json(updatedDepartment);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+  if (!updatedDepartment) {
+    throw new CustomError('Department not found', 404);
   }
+
+  res.json(updatedDepartment);
 });
 
 export const deleteDepartment = asyncHandler(async (req, res) => {
-  try {
-    const { departmentId } = req.params;
+  const { departmentId } = req.params;
+  const deletedDepartment = await Department.findByIdAndDelete(departmentId);
 
-    const deletedDepartment = await Department.findByIdAndDelete(departmentId);
-
-    if (!deletedDepartment) {
-      return res.status(404).json({ error: 'Department not found' });
-    }
-
-    res.json({ message: 'Department deleted successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+  if (!deletedDepartment) {
+    throw new CustomError('Department not found', 404);
   }
+
+  res.json({ message: 'Department deleted successfully' });
 });
