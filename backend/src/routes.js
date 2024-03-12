@@ -1,12 +1,15 @@
 import express from 'express';
 import userRoutes from './modules/user/user.routes.js';
 import projectRoutes from './modules/project/project.routes.js';
+import departmentRoutes from './modules/department/department.routes.js';
+
 import { uploadSingleImage, uploadSingleFile } from '../middlewares/fileUpload.js';
 
 const router = express.Router();
 
 router.use('/users', userRoutes);
 router.use('/projects', projectRoutes);
+router.use('/department', departmentRoutes);
 
 router.post('/uploads/images', uploadSingleImage, (req, res) => {
   const filePath = req.file.path;
