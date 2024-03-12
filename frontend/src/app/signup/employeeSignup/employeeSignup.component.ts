@@ -36,11 +36,10 @@ export class EmployeeSignupComponent {
     console.log(this.signUpForm.value);
     this.userServices.createUser(this.signUpForm.value).subscribe(
       (response) => {
-        console.log('Login successful:', response);
+        console.log(response.headers);
+        // console.log('Login successful:', response);
         alert('congratulation,you signed up successfully.');
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 1000);
+        this.signUpForm.reset();
       },
       (error) => {
         console.error('Signup error:', error);

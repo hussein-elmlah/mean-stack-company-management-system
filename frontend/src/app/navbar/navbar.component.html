@@ -39,8 +39,21 @@
             >أعمالنا</a
           >
         </li>
+        @if(isLoggedIn && role == 'client'){
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/addclientproject"
+              >اضافة مشروع</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/viewclientprojects"
+              >رؤية المشاريع</a
+            >
+          </li>
+        }
       </ul>
       <form class="d-flex">
+        @if (!isLoggedIn){
         <button (click)="viewLogin()">تسجيل دخول</button>
         <!-- <button (click)="viewSignup()">انشئ حساب</button> -->
         <div ngbDropdown class="d-inline-block login-btn mx-2">
@@ -68,7 +81,13 @@
               >عميل</a
             >
           </div>
+        
         </div>
+      }
+
+        @if(isLoggedIn && role == 'client'){
+          <button (click)="logOut()">تسجيل خروج</button>
+        }
       </form>
     </div>
   </div>

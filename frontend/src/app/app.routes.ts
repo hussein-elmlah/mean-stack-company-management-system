@@ -8,6 +8,8 @@ import { AboutComponent } from './home/about/about.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { UserSignupComponent } from './signup/userSignup/userSignup.component';
 import { EmployeeSignupComponent } from './signup/employeeSignup/employeeSignup.component';
+import { AddProjectComponent } from './client/add-project/add-project.component';
+import { ViewProjectsComponent } from './client/view-projects/view-projects.component';
 
 export const routes: Routes = [
   {
@@ -49,6 +51,16 @@ export const routes: Routes = [
     path: 'employeesignup',
     component: EmployeeSignupComponent,
     title: 'signup page',
+  },
+  {
+    path: 'addclientproject',
+    component: AddProjectComponent,
+    title: 'add project'
+  },
+  {
+    path: 'viewclientprojects',
+    component: ViewProjectsComponent,
+    title: 'view project'
   },
   {
     path: 'test', // this route should be deleted in production.

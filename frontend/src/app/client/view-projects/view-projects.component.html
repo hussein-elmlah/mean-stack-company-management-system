@@ -1,0 +1,57 @@
+{{ this.checkLogin() }}
+<div class="container">
+    <div class="row">
+    @if (projects.length == 0){
+        <div class="alert alert-dark text-center mt-4">لا يوجد مشعاريع تم اضافتها حتى الان</div>
+    }
+    @else{
+    @for (project of projects ; track $index){
+    <div class="col-md-4">
+        <div class="card mt-4">
+            <div class="card-body p-4">
+                @if(project.owner){
+                    <h4>اسم المالك : {{project.owner}}</h4>
+                }@else {
+                    <h4>لا يوجد اسم مالك تم اضافته</h4>
+                }
+               @if(project.description){
+                   <p class="mt-4">{{project.description}}</p>
+               }@else {
+                <p class="mt-4">لا يوجد وصف للمشروع تم اضافته</p>
+               }
+               <div class="row mt-4">
+                   <div class="col-md-4">
+                    @if(project.landArea){
+                        <h4>{{project.landArea}}</h4>
+                    }@else {
+                        <h4>0</h4>
+                    }
+                       <p> مساحة الارض</p>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        @if(project.landPerimeter){
+                            <h4>{{project.landPerimeter}}</h4>
+                        }@else {
+                            <h4>0</h4>
+                        }
+                        <p>محيط الارض</p>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        @if(project.buildingArea){
+                            <h4>{{project.buildingArea}}</h4>
+                        }@else {
+                            <h4>0</h4>
+                        }
+                        <p> مساحة البناء</p>
+                    </div>
+
+               </div>
+            </div>
+        </div>
+    </div>
+    }
+    }
+    </div>
+</div>

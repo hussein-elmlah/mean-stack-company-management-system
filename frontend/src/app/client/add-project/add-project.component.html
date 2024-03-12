@@ -1,0 +1,196 @@
+{{ this.checkLogin() }}
+<div>
+    <div class="container rounded-2">
+      @if(successmessage){
+        <div class="alert alert-success text-center mb-3">{{successmessage}}</div>
+      }
+      <form [formGroup]="addProjectForm" (ngSubmit)="handleform()">
+        <!--owner-->
+        <div class="row">
+        <div class="col-md-6 col-sm-12 mb-2">
+          <label for="owner" class="form-label">اسم المالك</label>
+          <input
+            type="text"
+            class="form-control"
+            id="owner"
+            formControlName="owner"
+            placeholder="ادخل اسم المالك"
+          />
+        </div>
+
+        <!-- location -->
+  
+        <div class="col-md-6 col-sm-12 mb-2">
+          <label for="location" class="form-label"> موقع المشروع</label>
+          <input
+            type="text"
+            class="form-control"
+            id="location"
+            formControlName="location"
+            placeholder="ادخل موقع المشروع"
+          />
+        </div>
+
+
+         <!-- planNumber -->
+  
+         <div class="col-md-6 col-sm-12 mb-2">
+          <label for="planNumber" class="form-label"> رقم المخطط</label>
+          <input
+            type="number"
+            class="form-control"
+            id="planNumber"
+            formControlName="planNumber"
+            placeholder="ادخل رقم المخطط"
+          />
+        </div>
+
+
+        <!-- plotNumber -->
+  
+        <div class="col-md-6 col-sm-12 mb-2">
+          <label for="plotNumber" class="form-label"> رقم القطعة</label>
+          <input
+            type="number"
+            class="form-control"
+            id="plotNumber"
+            formControlName="plotNumber"
+            placeholder="ادخل رقم القطعة"
+          />
+        </div>
+
+
+         <!-- landPerimeter -->
+  
+         <div class="col-md-6 col-sm-12 mb-2">
+          <label for="landPerimeter" class="form-label"> محيط الارض</label>
+          <input
+            type="number"
+            class="form-control"
+            id="landPerimeter"
+            formControlName="landPerimeter"
+            placeholder="ادخل محيط الارض"
+          />
+        </div>
+
+
+         <!-- landArea -->
+  
+         <div class="col-md-6 col-sm-12 mb-2">
+          <label for="landArea" class="form-label"> مساحة الارض</label>
+          <input
+            type="number"
+            class="form-control"
+            id="landArea"
+            formControlName="landArea"
+            placeholder="ادخل مساحة الارض"
+          />
+        </div>
+
+
+         <!-- program -->
+  
+         <div class="col-md-6 col-sm-12 mb-2">
+          <label for="program" class="form-label">نوع البرنامج</label>
+          <select class="form-control" id="program" formControlName="program">
+            <option value="" disabled selected hidden>اختر نوع البرنامج</option>
+            <option value="autocad">autocad</option>
+            <option value="revit">revit</option>
+          </select>
+        </div>
+
+        <!-- type -->
+  
+        <div class="col-md-6 col-sm-12 mb-2">
+          <label for="type" class="form-label"> نوع المشروع</label>
+          <select class="form-control" id="type"  formControlName="type">
+            <option value="" disabled selected hidden>ادخل نوع المشروع</option>
+            <option>villa</option>
+            <option>residential</option>
+            <option>administrative</option>
+            <option>commercial</option>
+            <option>other</option>
+          </select>
+        </div>
+
+
+         <!-- numberOfFloors -->
+  
+         <div class="col-md-6 col-sm-12 mb-2">
+          <label for="numberOfFloors" class="form-label"> عدد الطوابق</label>
+          <input
+            type="number"
+            class="form-control"
+            id="numberOfFloors"
+            formControlName="numberOfFloors"
+            placeholder="ادخل عدد الطوابق"
+          />
+        </div>
+
+
+         <!-- buildingArea -->
+  
+         <div class="col-md-6 col-sm-12 mb-2">
+          <label for="buildingArea" class="form-label"> مساحة البناء</label>
+          <input
+            type="number"
+            class="form-control"
+            id="buildingArea"
+            formControlName="buildingArea"
+            placeholder="ادخل مساحة البناء"
+          />
+        </div>
+
+
+         <!-- totalBuildingArea -->
+  
+         <div class="col-md-6 col-sm-12 mb-2">
+          <label for="totalBuildingArea" class="form-label"> اجمالي مساحات البناء</label>
+          <input
+            type="number"
+            class="form-control"
+            id="totalBuildingArea"
+            formControlName="totalBuildingArea"
+            placeholder="ادخل اجمالي مساحات البناء"
+          />
+        </div>
+
+         <!-- annex upper -->
+         <div class="col-md-3 col-sm-6 mb-2">
+        <label for="upper" class="form-label">ملحق علوي</label><br />
+        <input type="radio" name="upper" formControlName="upper" [value]="true" />نعم
+        <input style="margin-right: 20px;" type="radio" name="upper" formControlName="upper" [value]="false" />لا
+        </div>
+
+         <!-- annex land -->
+         <div class="col-md-3 col-sm-6 mb-2">
+          <label for="land" class="form-label">ملحق ارضي</label><br />
+          <input type="radio" name="land" formControlName="land" [value]="true" />نعم
+          <input style="margin-right: 20px;" type="radio" name="land" formControlName="land" [value]="false" />لا
+          </div>
+
+         <!-- description -->
+  
+         <div class="mb-2">
+          <label for="description" class="form-label">وصف المشروع</label>
+          <textarea
+            type="text"
+            class="form-control"
+            id="description"
+            formControlName="description"
+            rows="5"
+            placeholder="ادخل وصف المشروع هنا"
+          ></textarea>
+        </div>
+      </div>
+          
+  
+        <button
+          class="mb-2 mt-2 rounded-2"
+        >
+          اضف مشروع
+        </button>
+      </form>
+    </div>
+  </div>
+  

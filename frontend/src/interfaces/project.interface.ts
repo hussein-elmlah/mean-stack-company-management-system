@@ -37,6 +37,7 @@ interface Project {
   hoursExpectedPerDepartment?: HoursExpectedPerDepartment;
   fileLinkOriginal?: string; // Updated field name
   fileLinkFinal?: string; // New field
+  landPerimeter?:string;
   projectPictures?: string[];
   description?: string;
   createdAt?: Date;
