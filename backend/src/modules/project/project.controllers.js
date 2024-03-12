@@ -7,16 +7,27 @@ export const getAllProjects = asyncHandler(async (req, res) => {
   const page = parseInt(req.query.page, 10) || 1; // Default to page 1
   const limit = parseInt(req.query.limit, 10) || 10; // Default limit to 10 projects per page
 
-  // Construct filters dynamically based on query parameters
+  // Filter parameters
   const filters = {};
 
-  // Extract query parameters and construct filters
-  Object.keys(req.query).forEach((param) => {
-    // Exclude pagination parameters
-    if (param !== 'page' && param !== 'limit') {
-      filters[param] = req.query[param];
+// Apply filters based on query parameters
+for (const key in req.query) {
+  if (req.query.hasOwnProperty(key)) {
+    if (key === 'page' || key === 'limit') {
+      continue; // Skip pagination parameters
     }
-  });
+    // Handle filters for sub-documents or arrays
+    if (key.includes('.')) {
+      const [parent, child] = key.split('.');
+      const nestedField = `${parent}.${child}`;
+      filters[nestedField] = req.query[key];
+    } else {
+      // Handle direct fields
+      filters[key] = req.query[key];
+    }
+  }
+}
+  console.log(filters);
 
   // Calculate the index of the first project to retrieve
   const startIndex = (page - 1) * limit;
@@ -40,6 +51,7 @@ export const getAllProjects = asyncHandler(async (req, res) => {
     totalProjects,
   });
 });
+
 
 export const getProjectById = asyncHandler(async (req, res) => {
   const { projectId } = req.params;
