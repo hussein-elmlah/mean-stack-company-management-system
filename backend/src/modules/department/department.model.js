@@ -4,7 +4,6 @@ export const departmentSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
     set: function(value) {
       return value.toLowerCase();
@@ -20,3 +19,5 @@ export const departmentSchema = new mongoose.Schema({
     },
   },
 });
+const Department = mongoose.model('Department', departmentSchema);
+export default Department;
