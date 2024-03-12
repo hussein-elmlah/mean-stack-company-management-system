@@ -25,14 +25,14 @@ const projectSchema = new mongoose.Schema(
     name: { type: String },
     number: { type: Number },
     priority: { type: Number },
-    projectStatus: { type: String, enum: ['tracked', 'untracked', 'deleted'] },
+    projectStatus: { type: String, enum: ['tracked', 'untracked', 'deleted'], default: 'untracked' }, // Default is 'untracked'
     location: { type: String },
     planNumber: { type: String },
     plotNumber: { type: String },
     landPerimeter: { type: Number },
     landArea: { type: Number },
     dateOfSubmission: { type: Date },
-    type: { type: String },
+    type: { type: String, enum: ['autocad', 'revit'] }, // Enum accepting 'autocad' or 'revit'
     numberOfFloors: { type: Number },
     buildingArea: { type: Number },
     totalBuildingArea: { type: Number },
@@ -41,7 +41,8 @@ const projectSchema = new mongoose.Schema(
     actualStartDate: { type: Date },
     expectedCompletionDate: { type: Date },
     actualCompletionDate: { type: Date },
-    downloadLink: { type: String },
+    fileLinkOriginal: { type: String }, // Renamed from downloadLink
+    fileLinkFinal: { type: String }, // New field
     projectPictures: [{ type: String }],
     description: { type: String },
   },
