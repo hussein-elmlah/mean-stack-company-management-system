@@ -12,10 +12,10 @@ router.get('/allUsers', userController.getAllUsers);
 
 router.get('/:id', userController.getUserById);
 
-router.get('/', isAuth, userController.getUserProfile);
+// router.get('/', userController.getUserProfile);
 
-router.put('/profile', isAuth, userController.updateUserProfile);
+router.put('/:id', userController.updateUserProfile);
 
-router.delete('/profile', isAuth, userController.deleteUser);
+router.delete('/:id', userController.deleteUser);
 
 export default router;
