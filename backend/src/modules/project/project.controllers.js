@@ -23,6 +23,7 @@ export const getAllProjects = asyncHandler(async (req, res) => {
 
   // Fetch projects with pagination and filtering
   const projects = await Project.find(filters)
+    .sort({ priority: 1 }) // Sort by priority in ascending order
     .skip(startIndex)
     .limit(limit);
 
