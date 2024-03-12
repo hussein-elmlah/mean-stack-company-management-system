@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const projectSchema = new mongoose.Schema(
   {
-    // _id: { type: mongoose.Schema.Types.ObjectId, required: true },
+    // _id: { type: mongoose.Schema.Types.ObjectId },
     client: {
       user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -25,8 +25,8 @@ const projectSchema = new mongoose.Schema(
       upper: { type: Boolean, default: false },
       land: { type: Boolean, default: false },
     },
-    name: { type: String, required: true },
-    number: { type: Number, required: true },
+    name: { type: String },
+    number: { type: Number },
     priority: { type: Number },
     projectStatus: { type: String, enum: ['tracked', 'untracked', 'deleted'] },
     location: { type: String },
