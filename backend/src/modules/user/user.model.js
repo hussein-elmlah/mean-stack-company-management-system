@@ -60,6 +60,10 @@ const userSchema = new mongoose.Schema(
       endDate: { type: Date },
       salary: { type: Number },
     },
+    department: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Department',
+    },
   },
   { timestamps: true }
 );
