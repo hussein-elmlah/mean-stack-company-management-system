@@ -9,8 +9,9 @@ const router = express.Router();
 
 router.use('/users', userRoutes);
 router.use('/projects', projectRoutes);
-router.use('/department', departmentRoutes);
+router.use('/departments', departmentRoutes);
 
+//upload files routes
 router.post('/uploads/images', uploadSingleImage, (req, res) => {
   const filePath = req.file.path;
   if (!filePath) {
