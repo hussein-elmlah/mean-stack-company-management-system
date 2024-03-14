@@ -24,6 +24,7 @@ export class EmployeeSignupComponent {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
+      mobileNumber: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
@@ -33,6 +34,7 @@ export class EmployeeSignupComponent {
   }
 
   handleFormSubmit() {
+    console.log('is Valid ?', this.signUpForm.valid);
     console.log(this.signUpForm.value);
     this.userServices.createUser(this.signUpForm.value).subscribe(
       (response) => {

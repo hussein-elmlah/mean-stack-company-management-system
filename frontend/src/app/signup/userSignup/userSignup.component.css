@@ -22,9 +22,12 @@ button {
   color: white;
   width: 100%;
 }
-button:hover {
+button:hover:not(.disabled) {
   background-color: white;
   color: rgb(0, 34, 66);
   cursor: pointer;
   border-color: rgb(0, 34, 66);
+}
+.disabled {
+  cursor: not-allowed;
 }

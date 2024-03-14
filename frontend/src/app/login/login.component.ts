@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
-import { CookieService } from 'ngx-cookie-service';
+// import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  constructor(private router: Router, private userService: UserService,private cookieservice:CookieService) {
+  constructor(private router: Router, private userService: UserService) {
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [
@@ -35,7 +35,7 @@ export class LoginComponent {
     this.userService.login(this.loginForm.value).subscribe(
       (response) => {
         console.log('Login successful:', response);
-        localStorage.setItem('token',response.user)
+        localStorage.setItem('token', response.user);
         this.router.navigate(['/']).then(() => {
           window.location.reload();
         });
