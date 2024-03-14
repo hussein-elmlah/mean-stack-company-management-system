@@ -8,6 +8,7 @@ import { AboutComponent } from './home/about/about.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { UserSignupComponent } from './signup/userSignup/userSignup.component';
 import { EmployeeSignupComponent } from './signup/employeeSignup/employeeSignup.component';
+import { TrackedProjectsComponent } from './tracked-projects/tracked-projects.component';
 
 export const routes: Routes = [
   {
@@ -49,6 +50,11 @@ export const routes: Routes = [
     path: 'employeesignup',
     component: EmployeeSignupComponent,
     title: 'signup page',
+  },
+  {
+    path: 'trackedprojects',
+    component: TrackedProjectsComponent,
+    title: 'TrackedProjectsComponent page',
   },
   {
     path: 'test', // this route should be deleted in production.

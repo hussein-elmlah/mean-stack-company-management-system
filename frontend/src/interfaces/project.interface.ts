@@ -14,7 +14,7 @@ interface HoursExpectedPerDepartment {
 }
 
 interface Project {
-  id: string;
+  id?: string;
   name?: string;
   number?: number;
   location?: string;
@@ -31,7 +31,7 @@ interface Project {
   annex?: Annex;
   hoursExpectedToComplete?: number;
   expectedCompletionDate?: Date;
-  actualCompletionDate: Date | null;
+  actualCompletionDate?: Date | null;
   workingDepartments?: string[];
   hoursExpectedPerDepartment?: HoursExpectedPerDepartment;
   downloadLink?: string;
@@ -39,6 +39,7 @@ interface Project {
   description?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  budget?: number;
 }
 
 export default Project;

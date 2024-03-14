@@ -15,8 +15,8 @@ import User from '../../../interfaces/user.interface';
   selector: 'app-user-signup',
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule],
-  templateUrl: './usersignup.component.html',
-  styleUrl: './usersignup.component.css',
+  templateUrl: './userSignup.component.html',
+  styleUrl: './userSignup.component.css',
 })
 export class UserSignupComponent {
   signUpForm!: FormGroup;

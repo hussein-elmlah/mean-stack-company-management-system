@@ -1,0 +1,9 @@
+th,
+td {
+  text-align: center;
+  padding: 10px;
+}
+.card {
+  box-shadow: none;
+  border: none;
+}
