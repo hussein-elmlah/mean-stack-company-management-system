@@ -10,8 +10,8 @@ import Project from '../interfaces/project.interface';
 export class ProjectService {
   constructor(private apiService: ApiService) { }
 
-  getAllProjects(page: number = 0, limit: number = 30): Observable<{ projects: Project[], totalCount: number }> {
-    return this.apiService.get(`projects?page=${page}&limit=${limit}`).pipe(
+  getAllProjects(page: number = 0, limit: number = 30,clientId : String=''): Observable<{ projects: Project[], totalCount: number }> {
+    return this.apiService.get(`projects?page=${page}&limit=${limit}&client.user=${clientId}`).pipe(
       map((response) => {
         return {
           projects: response.projects,

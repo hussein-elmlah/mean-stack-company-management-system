@@ -12,7 +12,7 @@
       (loginForm.controls['username'].touched ||
       loginForm.controls['username'].dirty)){
       @if(loginForm.controls['username'].errors?.["required"]){
-      <div class="alert alert-danger">يجب ادخال اسم المستخدم</div>
+        <div class="form-text text-danger"><small>يجب ادخال اسم المستخدم</small></div>
       }}
       <label for="password" class="mb-2">كلمة السر</label>
       <input
@@ -24,11 +24,13 @@
       @if(loginForm.controls['password'].invalid &&
       loginForm.controls['password'].touched){
       @if(loginForm.controls['password'].errors?.["required"]){
-      <div class="alert alert-danger">يجب ادخال كلمة السر</div>
+        <div class="form-text text-danger"><small>يجب ادخال كلمة السر</small></div>
       }@else if(loginForm.controls['password'].errors?.["minlength"]){
-      <div class="alert alert-danger">
+        <div class="form-text text-danger">
+      <small>
         يجب ادخال على الاقل 8 حروف لكلمة السر
-      </div>
+      </small>
+    </div>
       } }
 
       <button

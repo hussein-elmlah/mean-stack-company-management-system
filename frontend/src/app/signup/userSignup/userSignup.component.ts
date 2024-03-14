@@ -26,6 +26,7 @@ export class UserSignupComponent {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
+      mobileNumber:new FormControl('',[Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
@@ -38,11 +39,10 @@ export class UserSignupComponent {
     console.log(this.signUpForm.value);
     this.userServices.createUser(this.signUpForm.value).subscribe(
       (response) => {
-        console.log('Login successful:', response);
+        console.log(response.headers);
+        // console.log('Login successful:', response);
         alert('congratulation,you signed up successfully.');
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 1000);
+        this.signUpForm.reset();
       },
       (error) => {
         if (error.error && error.error.message) {

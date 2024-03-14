@@ -19,4 +19,29 @@ export class NavbarComponent {
   viewSignup() {
     this.router.navigate(['/signup']);
   }
+
+  ngOnInit() {
+    this.checkLoggedIn();
+  }
+
+  isLoggedIn: boolean = false;
+  token: any = localStorage.getItem('token');
+  role !: String;
+
+  checkLoggedIn() {
+    const token = localStorage.getItem('token');
+    this.isLoggedIn = Boolean(token);
+    if (token) {
+      const tokenParts = token.split('.');
+      const payload = JSON.parse(atob(tokenParts[1]));
+      this.role = payload.role;
+      console.log('Current role:', this.role);
+    }
+  }
+
+  logOut() {
+    this.token = localStorage.removeItem('token');
+    this.checkLoggedIn();
+    window.location.reload();
+  }
 }

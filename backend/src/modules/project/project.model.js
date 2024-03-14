@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const projectSchema = new mongoose.Schema(
   {
-    // _id: { type: mongoose.Schema.Types.ObjectId, required: true },
+    // _id: { type: mongoose.Schema.Types.ObjectId },
     client: {
       user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -15,6 +15,7 @@ const projectSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    owner: { type: String },
     sender: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -27,23 +28,35 @@ const projectSchema = new mongoose.Schema(
       upper: { type: Boolean, default: false },
       land: { type: Boolean, default: false },
     },
-    name: { type: String, required: true },
-    number: { type: Number, required: true },
+    name: { type: String },
+    number: { type: Number },
+    priority: { type: Number },
+    projectStatus: {
+      type: String,
+      enum: ["tracked", "untracked", "deleted"],
+      default: "untracked",
+    }, // Default is 'untracked'
     location: { type: String },
     planNumber: { type: String },
     plotNumber: { type: String },
     landPerimeter: { type: Number },
     landArea: { type: Number },
     dateOfSubmission: { type: Date },
-    type: { type: String },
+    program: { type: String, enum: ["autocad", "revit"] }, // Renamed from 'type', with enum values 'autocad' or 'revit'
+    type: {
+      type: String,
+      enum: ["villa", "residential", "administrative", "commercial", "other"],
+    }, // Enum values for 'type'
     numberOfFloors: { type: Number },
     buildingArea: { type: Number },
     totalBuildingArea: { type: Number },
     hoursExpectedToComplete: { type: Number },
     expectedStartDate: { type: Date },
+    actualStartDate: { type: Date },
     expectedCompletionDate: { type: Date },
     actualCompletionDate: { type: Date },
-    downloadLink: { type: String },
+    fileLinkOriginal: { type: String }, // Renamed from downloadLink
+    fileLinkFinal: { type: String }, // New field
     projectPictures: [{ type: String }],
     description: { type: String },
   },
