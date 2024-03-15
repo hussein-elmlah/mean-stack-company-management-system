@@ -20,7 +20,12 @@ const projectEmployeeSchema = new mongoose.Schema({
     enum: ['active', 'inactive', 'on leave'],
     default: 'active'
   },
-}, { timestamps: true });
+},
+{ 
+  timestamps: true,
+  runValidators: true,
+},
+);
 
 // Define compound unique index on project and employee fields
 projectEmployeeSchema.index({ project: 1, employee: 1 }, { unique: true });

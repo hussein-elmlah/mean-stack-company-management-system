@@ -18,7 +18,11 @@ export const departmentSchema = new mongoose.Schema({
       message: 'Please choose another department name  🤨',
     },
   },
-
+},
+{ 
+  timestamps: true,
+  runValidators: true,
 });
+
 const Department = mongoose.model('Department', departmentSchema);
 export default Department;
