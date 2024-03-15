@@ -65,6 +65,28 @@ process.on('unhandledRejection', (exception) => {
 
 connectDB();
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+// Handle termination signals for graceful shutdown
+process.on('SIGINT', () => {
+  console.log('Received SIGINT signal. Closing server gracefully...');
+  shutdown();
+});
+
+process.on('SIGTERM', () => {
+  console.log('Received SIGTERM signal. Closing server gracefully...');
+  shutdown();
+});
+
+function shutdown() {
+  server.close((err) => {
+    if (err) {
+      console.error('Error closing server:', err);
+      process.exit(1);
+    }
+    console.log('Server closed gracefully');
+    process.exit(0);
+  });
+}
