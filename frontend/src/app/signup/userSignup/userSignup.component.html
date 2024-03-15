@@ -134,8 +134,15 @@
 
       <button
         class="mb-2 mt-2 rounded-2"
-        disabled="!signUpForm.valid"
-        [class.disabled]="!signUpForm.valid"
+        [disabled]="
+          !(
+            signUpForm.controls['firstName'].valid &&
+            signUpForm.controls['lastName'].valid &&
+            signUpForm.controls['email'].valid &&
+            signUpForm.controls['password'].valid &&
+            signUpForm.controls['mobileNumber'].valid
+          )
+        "
       >
         انشئ حساب
       </button>

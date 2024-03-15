@@ -133,13 +133,18 @@
       </div>
 
       <button
-        type="submit"
-        class="mb-2 mt-2 rounded-2"
-        disabled="!signUpForm.valid"
-        [class.disabled]="!signUpForm.valid"
-      >
-        انشئ حساب
-      </button>
+      class="mb-2 mt-2 rounded-2"
+      [disabled]="
+        !(
+          signUpForm.controls['firstName'].valid &&
+          signUpForm.controls['lastName'].valid &&
+          signUpForm.controls['email'].valid &&
+          signUpForm.controls['password'].valid
+        )
+      "
+    >
+      انشئ حساب
+    </button>
     </form>
   </div>
   <div class="text-center">
