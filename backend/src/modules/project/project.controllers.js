@@ -12,8 +12,8 @@ export const getAllProjects = asyncHandler(async (req, res) => {
 
   // Extract query parameters and construct filters
   Object.keys(req.query).forEach((param) => {
-    // Exclude pagination parameters
-    if (param !== 'page' && param !== 'limit') {
+    // Exclude pagination and order parameters
+    if (param !== 'page' && param !== 'limit' && param !== 'order') {
       filters[param] = req.query[param];
     }
   });
@@ -22,10 +22,25 @@ export const getAllProjects = asyncHandler(async (req, res) => {
   const startIndex = (page - 1) * limit;
 
   // Fetch projects with pagination and filtering
-  const projects = await Project.find(filters)
-    .sort({ priority: 1 }) // Sort by priority in ascending order
-    .skip(startIndex)
-    .limit(limit);
+  let query = Project.find(filters);
+
+  // Sorting
+  if (req.query.order) {
+    const orderField = req.query.order.toLowerCase();
+    const sortOrder = orderField.startsWith('-') ? -1 : 1;
+    const field = orderField.replace(/^-/, ''); // Remove leading '-'
+
+    // Check if the field exists in the schema to prevent errors
+    if (Object.keys(Project.schema.paths).includes(field)) {
+      const sortObject = {};
+      sortObject[field] = sortOrder;
+      query = query.sort(sortObject);
+    } else {
+      throw new CustomError('Invalid order field', 400);
+    }
+  }
+
+  const projects = await query.skip(startIndex).limit(limit);
 
   // Count total number of projects matching the filters
   const totalProjects = await Project.countDocuments(filters);
