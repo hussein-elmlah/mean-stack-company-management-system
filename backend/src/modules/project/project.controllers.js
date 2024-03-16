@@ -38,7 +38,7 @@ export const getAllProjects = asyncHandler(async (req, res) => {
 
   // Sorting
   if (req.query.order) {
-    const orderField = req.query.order.toLowerCase();
+    const orderField = req.query.order;
     const sortOrder = orderField.startsWith('-') ? -1 : 1;
     const field = orderField.replace(/^-/, ''); // Remove leading '-'
 
