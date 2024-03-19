@@ -1,8 +1,9 @@
+
 .loginpage {
   padding: 20px;
   width: 50%;
   margin: 30px auto;
-  box-shadow: 5px 5px 10px 10px rgb(226, 226, 226);
+  /* box-shadow: 5px 5px 10px 10px rgb(226, 226, 226); */
 }
 @media (max-width: 767px) {
   .loginpage {

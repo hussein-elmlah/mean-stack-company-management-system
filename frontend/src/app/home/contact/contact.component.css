@@ -38,15 +38,19 @@
 form{
     border-radius: 10px;
     border: 0px;
-    box-shadow: 3px 3px 20px 10px rgb(228, 228, 228);
+    /* box-shadow: 3px 3px 20px 10px rgb(228, 228, 228); */
+    border: 1px white solid;
     padding: 20px;
+    background: var(--offwhite-color);
 }
 input,textarea{
     text-align: right;
+    background: rgb(248,248,248);
 }
 .card{
     border: 0px;
-    box-shadow: 5px 5px 10px 5px rgb(180, 180, 180);
+    /* box-shadow: 5px 5px 10px 5px rgb(180, 180, 180); */
+    background: var(--offwhite-color);
     padding: 20px;
     height: 300px;
     transition: all 0.4s ease-in-out;

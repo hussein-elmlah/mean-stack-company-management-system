@@ -1,5 +1,6 @@
 .container {
-    box-shadow: 5px 5px 10px 10px rgb(226, 226, 226);
+    /* box-shadow: 5px 5px 10px 10px rgb(226, 226, 226); */
+    border: 1px white solid;
     padding: 20px;
     width: 70%;
     margin: 30px auto;
@@ -18,7 +19,7 @@
     color: black;
     /* text-decoration: none; */
   }
-  
+
   button {
     padding: 10px 20px 10px 20px;
     transition: all 0.4s ease-in-out;
@@ -32,4 +33,3 @@
     cursor: pointer;
     border-color: rgb(0, 34, 66);
   }
-  

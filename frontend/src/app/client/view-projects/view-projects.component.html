@@ -7,7 +7,7 @@
     @else{
     @for (project of projects ; track $index){
     <div class="col-md-4">
-        <div class="card mt-4">
+        <div class="card mt-4 shadow">
             <div class="card-body p-4">
                 @if(project.owner){
                     <h4>اسم المالك : {{project.owner}}</h4>
@@ -28,7 +28,7 @@
                     }
                        <p> مساحة الارض</p>
                     </div>
-                    
+
                     <div class="col-md-4">
                         @if(project.landPerimeter){
                             <h4>{{project.landPerimeter}}</h4>
@@ -37,7 +37,7 @@
                         }
                         <p>محيط الارض</p>
                     </div>
-                    
+
                     <div class="col-md-4">
                         @if(project.buildingArea){
                             <h4>{{project.buildingArea}}</h4>

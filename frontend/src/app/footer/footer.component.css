@@ -1,5 +1,5 @@
 footer {
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     225deg,
     hsl(34deg 81% 21%) 0%,
     hsl(33deg 73% 21%) 16%,
@@ -13,11 +13,13 @@ footer {
     hsl(34deg 70% 8%) 66%,
     hsl(34deg 70% 5%) 81%,
     hsl(0deg 0% 0%) 100%
-  );
+  ); */
+  background: var(--bg-main-color);
+  opacity: 0.8;
   color: white;
 }
 img {
-  width: 40%;
+  width: 100px;
 }
 .social-icons {
   display: flex;
@@ -25,18 +27,18 @@ img {
   transition: all 0.4s ease-in-out;
 }
 .social-icons i:hover {
-  font-size: 2.5rem;
+  /* font-size: 2.5rem; */
 }
 i {
   color: #c38738;
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
 }
 span {
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
 }
 @media (max-width: 991px) {
   .left {
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
   }
   .row {
     justify-content: center;

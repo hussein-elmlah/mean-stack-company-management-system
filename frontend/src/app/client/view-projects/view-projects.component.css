@@ -1,7 +1,11 @@
+.container {
+  min-height: 100vh;
+}
 p{
     color: rgb(145, 142, 142);
     font-weight: bold;
 }
 .card{
-    box-shadow: 3px 3px 10px 3px rgb(156, 156, 156);
+  background: var(--offwhite-color);
+    /* box-shadow: 3px 3px 10px 3px rgb(156, 156, 156); */
 }

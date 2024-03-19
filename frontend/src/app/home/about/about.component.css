@@ -21,13 +21,17 @@ p{
     font-weight: bold;
 }
 .imagebox{
-    box-shadow:5px 5px 30px 10px rgb(179, 179, 179);
+    /* box-shadow:5px 5px 30px 10px rgb(179, 179, 179); */
+    /* border: 1px white solid; */
+    filter: drop-shadow(0px 1px 0px var(--offwhite-color));
     margin: 30px;
     transition: all 0.4s ease-in-out;
+    scale: 1.2;
 }
-.imagebox:hover{
-    transform: scale(1.1,1.1);
-}
+/* .imagebox:hover{
+    border: transparent;
+    transform: scale(1.2,1.2);
+} */
 .aboutdiv{
     align-items: center;
     margin: 20px 0px 20px 0px;
@@ -36,7 +40,7 @@ p{
 .working{
     margin: 20px 0px 20px 0px;
     padding: 50px 0px 50px 40px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.6);
     color: #DB6037;
     text-align: center;
 }

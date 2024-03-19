@@ -1,6 +1,7 @@
-<nav class="navbar navbar-expand-lg navbarstyle">
-  <div class="container">
-    <img src="../../assets/images/navlogo.png" width="80" />
+
+<nav class="fixed-top navbar navbar-expand-lg navbarstyle navbar-dark bg-main shadow p-2 px-5 justify-content-center align-items-center align-content-center">
+  <div class="container px-5 ">
+    <img class="navbar-brand" src="../../assets/images/navlogo.png" width="80" />
     <button
       class="navbar-toggler"
       type="button"
@@ -12,6 +13,14 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    <form class="form-inline my-2 my-lg-0 mx-auto ml-0">
+      <input
+        class="form-control mr-sm-5 navbar-search"
+        type="search"
+        placeholder="بحث عن مشروع"
+        aria-label="Search"
+      />
+    </form>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -56,7 +65,7 @@
         @if (!isLoggedIn){
         <button (click)="viewLogin()">تسجيل دخول</button>
         <!-- <button (click)="viewSignup()">انشئ حساب</button> -->
-        <div ngbDropdown class="d-inline-block login-btn mx-2">
+        <div ngbDropdown class="d-inline-block pt-1 login-btn mx-2">
           <button
             type="button"
             class="btn btn-outline-primary"
@@ -69,7 +78,7 @@
           <div
             ngbDropdownMenu
             aria-labelledby="dropdownBasic1"
-            class="ngbDropdownMenu p-2"
+            class="ngbDropdownMenu p-2 bg-dark"
           >
             <a
               class="nav-link pb-2"
@@ -81,13 +90,80 @@
               >عميل</a
             >
           </div>
-        
+
         </div>
       }
 
         @if(isLoggedIn && role == 'client'){
           <button (click)="logOut()">تسجيل خروج</button>
         }
+        <li class="nav-item dropdown px-3 pe-4">
+          <a
+            class="nav-link"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="fa fa-bell translate-middle-y"></i>
+            <span class="badge bg-danger translate-middle-y">4</span>
+            <!-- Add a badge for unread notifications -->
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-end notification-ui_dd bg-dark text-light"
+            aria-labelledby="navbarDropdown"
+          >
+            <div class="notification-ui_dd-header">
+              <h3 class="text-center">Notification</h3>
+            </div>
+            <div class="notification-ui_dd-content">
+              <div class="notification-list notification-list--unread">
+                <div class="notification-list_img">
+                  <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user" />
+                </div>
+                <div class="notification-list_detail p-2">
+                  <p><b>John Doe</b> reacted to your post</p>
+                  <p><small>10 mins ago</small></p>
+                </div>
+                <div class="notification-list_feature-img">
+                  <img
+                    src="https://i.imgur.com/AbZqFnR.jpg"
+                    alt="Feature image"
+                  />
+                </div>
+              </div>
+              <!-- Add more notification items here -->
+            </div>
+            <div class="notification-ui_dd-footer">
+              <a href="#!" class="btn btn-success btn-block">View All</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown px-3">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="userDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="fa fa-user translate-middle-y"></i>
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-end bg-dark"
+            aria-labelledby="userDropdown"
+          >
+            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" href="#">Settings</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Logout</a>
+          </div>
+        </li>
+
       </form>
     </div>
   </div>
