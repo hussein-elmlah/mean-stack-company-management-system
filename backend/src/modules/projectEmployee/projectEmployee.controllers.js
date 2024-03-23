@@ -9,6 +9,19 @@ export const getAllProjectEmployees = asyncHandler(async (req, res) => {
   // Pagination parameters
   const page = parseInt(req.query.page, 10) || 1; // Default to page 1
   const limit = parseInt(req.query.limit, 10) || 10; // Default limit to 10 project employees per page
+  // handle pagination out of bounds parameters
+  if (page < 1) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid page number',
+    });
+  }
+  if (limit < 1 || limit > 100) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid limit number',
+    });
+  }
 
   // Construct filters dynamically based on query parameters
   let filters = {};
@@ -17,7 +30,7 @@ export const getAllProjectEmployees = asyncHandler(async (req, res) => {
   // Extract other query parameters and construct filters
   Object.keys(req.query).forEach((param) => {
     // Exclude pagination and sorting parameters
-    if (param !== 'page' && param !== 'limit' && param !== 'order') {
+    if (!['page', 'limit', 'order'].includes(param)) {
       filters[param] = req.query[param];
     }
   });

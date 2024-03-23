@@ -6,6 +6,19 @@ export const getAllProjects = asyncHandler(async (req, res) => {
   // Pagination parameters
   const page = parseInt(req.query.page, 10) || 1; // Default to page 1
   const limit = parseInt(req.query.limit, 10) || 10; // Default limit to 10 projects per page
+  // handle pagination out of bounds parameters
+  if (page < 1) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid page number',
+    });
+  }
+  if (limit < 1 || limit > 100) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid limit number',
+    });
+  }
 
   // Construct filters dynamically based on query parameters
   let filters = {};
@@ -25,7 +38,8 @@ export const getAllProjects = asyncHandler(async (req, res) => {
   // Extract other query parameters and construct filters
   Object.keys(req.query).forEach((param) => {
     // Exclude pagination, sorting, and search parameters
-    if (param !== 'page' && param !== 'limit' && param !== 'order' && param !== 'search') {
+    if (!['page', 'limit', 'order', 'search'].includes(param))
+    {
       filters[param] = req.query[param];
     }
   });
@@ -34,13 +48,13 @@ export const getAllProjects = asyncHandler(async (req, res) => {
   const startIndex = (page - 1) * limit;
 
   // Fetch projects with pagination, filtering, and sorting
-  let query = Project.find(filters);
+  let query = Project.find(filters); // check for error (when adding await makes error)
 
   // Sorting
   if (req.query.order) {
     const orderField = req.query.order;
     const sortOrder = orderField.startsWith('-') ? -1 : 1;
-    const field = orderField.replace(/^-/, ''); // Remove leading '-'
+    const field = orderField.replace(/^-/, '');
 
     const sortCriteria = {};
     sortCriteria[field] = sortOrder;
