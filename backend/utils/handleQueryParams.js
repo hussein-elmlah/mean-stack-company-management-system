@@ -1,10 +1,11 @@
 export const handleQueryParams = async (model, queryParams, searchField) => {
     const { page = 1, limit = 10, order, search, ...filters } = queryParams;
   
-    const parsedPage = parseInt(page, 10);
-    const parsedLimit = parseInt(limit, 10);
+    const parsedPage = Number(page);
+    const parsedLimit = Number(limit);
+    const maxLimit = 30;
   
-    if (parsedPage < 1 || parsedLimit < 1 || parsedLimit > 100) {
+    if (parsedPage < 1 || parsedLimit < 1 || parsedLimit > maxLimit) {
       throw new CustomError('Invalid pagination parameters', 400);
     }
   
