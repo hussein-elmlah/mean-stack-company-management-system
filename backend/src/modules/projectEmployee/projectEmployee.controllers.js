@@ -1,77 +1,21 @@
 import ProjectEmployee from './projectEmployee.model.js';
 import asyncHandler from '../../../lib/asyncHandler.js';
 import CustomError from '../../../lib/customError.js';
+import { handleQueryParams } from '../../../utils/handleQueryParams.js';
 
 // @desc    Get all project employees
 // @route   GET /project-employees
 // @access  Public
 export const getAllProjectEmployees = asyncHandler(async (req, res) => {
-  // Pagination parameters
-  const page = parseInt(req.query.page, 10) || 1; // Default to page 1
-  const limit = parseInt(req.query.limit, 10) || 10; // Default limit to 10 project employees per page
-  // handle pagination out of bounds parameters
-  if (page < 1) {
-    return res.status(400).json({
+  try {
+    const result = await handleQueryParams(ProjectEmployee, req.query);
+    res.json(result);
+  } catch (error) {
+    res.status(400).json({
       success: false,
-      message: 'Invalid page number',
+      message: error.message,
     });
   }
-  if (limit < 1 || limit > 100) {
-    return res.status(400).json({
-      success: false,
-      message: 'Invalid limit number',
-    });
-  }
-
-  // Construct filters dynamically based on query parameters
-  let filters = {};
-
-
-  // Extract other query parameters and construct filters
-  Object.keys(req.query).forEach((param) => {
-    // Exclude pagination and sorting parameters
-    if (!['page', 'limit', 'order'].includes(param)) {
-      filters[param] = req.query[param];
-    }
-  });
-
-  // Calculate the index of the first project employee to retrieve
-  const startIndex = (page - 1) * limit;
-
-  // Fetch project employees with pagination, filtering, and sorting
-  let query = ProjectEmployee.find(filters);
-
-  // Sorting
-  if (req.query.order) {
-    const orderField = req.query.order;
-    const sortOrder = orderField.startsWith('-') ? -1 : 1;
-    const field = orderField.replace(/^-/, ''); // Remove leading '-'
-
-    // Check if the field exists in the schema to prevent errors
-    if (Object.keys(ProjectEmployee.schema.paths).includes(field)) {
-      const sortObject = {};
-      sortObject[field] = sortOrder;
-      query = query.sort(sortObject);
-    } else {
-      throw new CustomError('Invalid order field', 400);
-    }
-  }
-
-  const projectEmployees = await query.skip(startIndex).limit(limit);
-
-  // Count total number of project employees matching the filters
-  const totalProjectEmployees = await ProjectEmployee.countDocuments(filters);
-
-  // Calculate total number of pages
-  const totalPages = Math.ceil(totalProjectEmployees / limit);
-
-  // Response with paginated project employees and pagination metadata
-  res.json({
-    projectEmployees,
-    currentPage: page,
-    totalPages,
-    totalProjectEmployees,
-  });
 });
 
 // @desc    Get project employee by ID
