@@ -43,10 +43,7 @@ export const handleQueryParams = async (model, queryParams, searchField) => {
     const dataQuery = query.skip(startIndex).limit(parsedLimit);
     const data = await dataQuery;
   
-    // Count total number of documents matching the filters for pagination
     const totalCount = await model.countDocuments(filterConditions);
-  
-    // Calculate total number of pages
     const totalPages = Math.ceil(totalCount / parsedLimit);
   
     return {
