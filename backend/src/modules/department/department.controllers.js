@@ -7,15 +7,8 @@
 // @route   GET /departments
 // @access  Public
 export const getAllDepartments = asyncHandler(async (req, res) => {
-  try {
     const result = await handleQueryParams(Department, req.query, 'name');
     res.json(result);
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
 });
 
 export const getDepartmentById = asyncHandler(async (req, res) => {

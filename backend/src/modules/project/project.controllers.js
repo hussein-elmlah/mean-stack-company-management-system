@@ -7,15 +7,8 @@ import { handleQueryParams } from '../../../utils/handleQueryParams.js';
 // @route   GET /projects
 // @access  Public
 export const getAllProjects = asyncHandler(async (req, res) => {
-  try {
     const result = await handleQueryParams(Project, req.query, 'name');
     res.json(result);
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message,
-    });
-  }
 });
 
 export const getProjectById = asyncHandler(async (req, res) => {

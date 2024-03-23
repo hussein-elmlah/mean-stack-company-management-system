@@ -1,3 +1,5 @@
+import CustomError from '../lib/customError.js';
+
 export const handleQueryParams = async (model, queryParams, searchField) => {
     const { page = 1, limit = 10, order, search, ...filters } = queryParams;
   
@@ -16,7 +18,7 @@ export const handleQueryParams = async (model, queryParams, searchField) => {
       filterConditions[searchField] = { $regex: searchRegex };
     }
     if (search && !searchField) {
-        throw new Error('Search is not allowed');
+        throw new CustomError('Invalid search parameters', 400);
     }
   
     Object.keys(filters).forEach(param => {
